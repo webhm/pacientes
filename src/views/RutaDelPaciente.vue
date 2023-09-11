@@ -189,7 +189,7 @@ onMounted(async () => {
                         <button class="text-center cursor-pointer p-3"
                                 :class="[type && receptor ? 'btn-loginv3' : 'left-button']"
                                 @click="subscribe(pathKey, user.NHC)">
-                          Subscribir
+                          Suscribir
                         </button>
                       </div>
                     </div>
@@ -254,7 +254,7 @@ onMounted(async () => {
                   <b>Nota Importante:</b> Esta opción sólo se activará si usted tiene cirugías activas programadas, si
                   desea conocer más de esta opción o necesita ayuda con la misma, comuníquese con nuestro call center al
                   <a href="tel:1800463876">1800 HMETRO</a>, a nuestro
-                  <a href="https://web.whatsapp.com/send?phone=593984789952" target="_blank">Whatsapp</a> o a través de
+                  <a href="https://api.whatsapp.com/send?text=Necesito%20ayuda&phone=593984789952" target="_blank">Whatsapp</a> o a través de
                   nuestros canales digitales. </p>
               </div>
             </template>

@@ -122,7 +122,7 @@ onMounted(async () => {
 <!--              </div>-->
               <p class="text-right mb-0">
                 Si necesitas soporte o ayuda, llámanos al <a href="tel:1800463876">1800 HMETRO</a> o a nuestro
-                <a href="https://web.whatsapp.com/send?phone=593984789952" target="_blank"><img src="@/assets/whatsapp.png" style="width: 22px;"> Whatsapp</a>
+                <a href="https://api.whatsapp.com/send?text=Necesito%20ayuda&phone=593984789952" target="_blank"><img src="@/assets/whatsapp.png" style="width: 22px;"> Whatsapp</a>
               </p>
               <div class="form-group my-2">
                 <div class="row no-gutters no-margin">

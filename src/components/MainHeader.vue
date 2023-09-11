@@ -5,7 +5,7 @@ import MainDropDown from "@/components/MainDropDown.vue";
   <header>
     <div class=" top-header">
       <div class="container py-1 d-flex justify-content-between">
-        <div class="p-3 main-image my-3 my-md-0">
+        <div class="p-3 main-image my-2 my-md-0">
           <img src="../assets/logo-metro.png" style="width: 100%" alt="Metrovirtual">
         </div>
         <div class="p-2">

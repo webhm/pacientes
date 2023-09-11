@@ -571,7 +571,8 @@ onMounted(async () => {
                   </ul>
                   <p class="text-right my-1">
                     Si no recibiste la confirmación, contáctese al <a href="tel:1800463876">1800 HMETRO</a> o a nuestro
-                    <a href="https://web.whatsapp.com/send?phone=593984789952" target="_blank"><img src="@/assets/whatsapp.png" style="width: 22px;"> Whatsapp</a>
+                    <a href="https://api.whatsapp.com/send?text=Necesito%20ayuda&phone=593984789952" target="_blank">
+                      <img src="@/assets/whatsapp.png" style="width: 22px;"> Whatsapp</a>
                   </p>
 
                 </div>
@@ -636,7 +637,8 @@ onMounted(async () => {
                 <div class="col-12 col-md-7">
                   <p class="text-right my-3 mt-4">
                     Si necesitas soporte o ayuda, llámanos al <a href="tel:1800463876">1800 HMETRO</a> o a nuestro
-                    <a href="https://web.whatsapp.com/send?phone=593984789952" target="_blank"><img src="@/assets/whatsapp.png" style="width: 22px;"> Whatsapp</a>
+                    <a href="https://api.whatsapp.com/send?text=Necesito%20ayuda&phone=593984789952" target="_blank">
+                      <img src="@/assets/whatsapp.png" style="width: 22px;"> Whatsapp</a>
                   </p>
                 </div>
               </div>
@@ -654,7 +656,8 @@ onMounted(async () => {
                       </a>
                     </div>
                     <div class="col-6">
-                      <a class="d-flex justify-content-center cursor-pointer " href="#" target="_blank">
+                      <a class="d-flex justify-content-center cursor-pointer" target="_blank"
+                         href="https://play.google.com/store/apps/details?id=com.metrovirtual.patients" >
                         <img src="@/assets/app_store.png" alt="Mundometro icon"
                              width="100%" height="auto ">
                       </a>
@@ -873,7 +876,8 @@ onMounted(async () => {
                     </ul>
                     <p class="text-right mb-0 mt-2">
                       Si no recibes la confirmación, contáctese al <a href="tel:1800463876">1800 HMETRO</a> o a nuestro
-                      <a href="https://web.whatsapp.com/send?phone=593984789952" target="_blank"><img src="@/assets/whatsapp.png" style="width: 22px;"> Whatsapp</a>
+                      <a href="https://api.whatsapp.com/send?text=Necesito%20ayuda&phone=593984789952" target="_blank">
+                        <img src="@/assets/whatsapp.png" style="width: 22px;"> Whatsapp</a>
                     </p>
                   </div>
                 </div>
@@ -923,7 +927,8 @@ onMounted(async () => {
                     contraseña</p>
                   <p class="text-right mb-0">
                     Si no recibiste la confirmación, contáctese al <a href="tel:1800463876">1800 HMETRO</a> o a nuestro
-                    <a href="https://web.whatsapp.com/send?phone=593984789952" target="_blank"><img src="@/assets/whatsapp.png" style="width: 22px;"> Whatsapp</a>
+                    <a href="https://api.whatsapp.com/send?text=Necesito%20ayuda&phone=593984789952" target="_blank">
+                      <img src="@/assets/whatsapp.png" style="width: 22px;"> Whatsapp</a>
                   </p>
                 </div>
               </div>
