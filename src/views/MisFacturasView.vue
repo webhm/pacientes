@@ -165,7 +165,7 @@ const goToInvoiceCtrl = async (invoice) => {
 onMounted(async () => {
   const now = dayjs();
   end.value = now.format('YYYY-MM-DD');
-  start.value = now.subtract(6, 'month').format('YYYY-MM-DD');
+  start.value = now.subtract(12, 'month').format('YYYY-MM-DD');
   await getInvoices();
   getNextInvoices();
 });
@@ -280,7 +280,7 @@ onMounted(async () => {
               <template v-else>
                 <div class=" my-1 p-3  text-center">
                   <h4 class="center text-search">
-                    No tienes facturas disponibles
+                    No tienes facturas disponibles un año atrás
                   </h4>
                 </div>
               </template>

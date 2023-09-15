@@ -85,17 +85,31 @@ const goBack = async () => {
                                                      alt="Mundometro icon" width="200px" height="2100px">
                                             </div>
                                             <div class="col-12 col-md-6 my-5">
-                                                <h5 style=" color: #44bdf0; font-size: 18px; font-weight: 500;">
+                                                <h5 class="my-3" style=" color: #44bdf0; font-size: 18px; font-weight: 500;">
                                                     Bienvenido/a</h5>
-                                                <p class="black-colorv2">Nombre:</p>
                                                 <p class="title-user"
-                                                   style=" color: #05305d; font-size: 24px; font-weight: 600;">
-                                                    Sr/a {{ user?.NOMBRES }} {{ user?.APELLIDOS }}</p>
-                                                <p class="black-colorv2 my-1">Email:</p>
+                                                   style=" color: #05305d; font-size: 22px; font-weight: 600;">
+                                                    Sr/a. {{ user?.NOMBRES }} {{ user?.APELLIDOS }}</p>
+                                                <p class="black-colorv2 my-1">Email: </p>
                                                 <p class="title-user my-1" v-bind:key="key"
                                                    v-for="(email, key) in user.EMAIL_ACCOUNT"
-                                                   style=" color: #05305d; font-size: 24px; font-weight: 600;">
+                                                   style=" color: #05305d; font-size: 20px; font-weight: 600;">
                                                     {{email}}</p>
+                                                <p class="black-colorv2 my-1">Dirección: </p>
+                                                <p class="title-user my-1" v-bind:key="key"
+                                                   v-for="(address, key) in user.DIRECCIONES"
+                                                   style=" color: #05305d; font-size: 20px; font-weight: 600;">
+                                                    {{address.FIELD}}</p>
+                                                <p class="black-colorv2 my-1">Teléfono: </p>
+                                                <p class="title-user my-1" v-bind:key="key"
+                                                   v-for="(phone, key) in user.TELEFONOS"
+                                                   style=" color: #05305d; font-size: 20px; font-weight: 600;">
+                                                    {{phone.FIELD}}</p>
+                                                <p class="black-colorv2 my-1">Celular: </p>
+                                                <p class="title-user my-1" v-bind:key="key"
+                                                   v-for="(phone, key) in user.CELULARES"
+                                                   style=" color: #05305d; font-size: 20px; font-weight: 600;">
+                                                    {{phone.FIELD}}</p>
 <!--                                              <p class="black-colorv2">Nombre:</p>-->
 <!--                                              <p class="title-user"-->
 <!--                                                 style=" color: #05305d; font-size: 24px; font-weight: 600;">-->

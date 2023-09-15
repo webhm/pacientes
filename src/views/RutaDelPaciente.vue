@@ -229,7 +229,7 @@ onMounted(async () => {
                         </template>
                         <template v-else>
                           <div class="col-12 my-2">
-                            <p class="text-center text-results">No hay subscritos</p>
+                            <p class="text-center text-results">No hay contactos</p>
                           </div>
                         </template>
                       </template>
@@ -240,7 +240,7 @@ onMounted(async () => {
               <template v-else>
                 <div class=" my-1 p-3  text-center">
                   <h4 class="center text-search">
-                    No tienes procedimientos programados
+                    No tienes cirugías programadas
                   </h4>
                 </div>
               </template>
