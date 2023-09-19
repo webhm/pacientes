@@ -40,15 +40,13 @@ export function patientAuthLostPassChange(data) {
     return register.post(data);
 }
 export function patientSendEmail(data) {
-    const register = mande('https://hospitalmetropolitano.org/api/auth/verify');
+    const register = mande('https://hospitalmetropolitano.org/api/auth/metrovirtual/verify');
     return register.post(data);
 }
 export function patientSendSuccessPasswordEmail(data) {
     const register = mande('https://hospitalmetropolitano.org/api/auth/password/success');
     return register.post(data);
 }
-
-
 
 export function patientRegisterValidation(token) {
     const validate = mande(`${baseURL}/auth/verify/${token}`);
