@@ -37,27 +37,3 @@ useMyCheckoutsStore = defineStore({
         checkouts: [],
     }),
 });
-ATENCION
-    :
-    "81181"
-FECHA_ATENCION
-    :
-    "13-07-2023"
-MED_FOR
-    :
-    "ESPINOZA GONZALEZ CARLOS FRANCISCO"
-NHC
-    :
-    "389039"
-NUM
-    :
-    "1"
-PTE
-    :
-    "ENRIQUEZ DE LA TORRE VALENTINA JAMILE"
-forms
-    :
-    []
-visible
-    :
-    false

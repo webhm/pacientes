@@ -164,6 +164,10 @@ const getLabResults = async () => {
   } catch (e) {
     isLoadingLab.value = false;
     console.log('error', e);
+    if(e.message === 'Unauthorized'){
+      await authStore.logout();
+      await router.replace({ name: "ingreso" });
+    }
   }
 };
 const getMoreLabResults = async () => {
@@ -190,6 +194,10 @@ const getMoreLabResults = async () => {
   } catch (e) {
     isLoadingMoreLab.value = false;
     console.log('error', e);
+    if(e.message === 'Unauthorized'){
+      await authStore.logout();
+      await router.replace({ name: "ingreso" });
+    }
   }
 };
 const clearLabDates = () => {
@@ -226,6 +234,10 @@ const getImageResults = async () => {
   } catch (e) {
     isLoadingImage.value = false;
     console.log('error', e);
+    if(e.message === 'Unauthorized'){
+      await authStore.logout();
+      await router.replace({ name: "ingreso" });
+    }
   }
 };
 const getMoreImageResults = async () => {
@@ -252,6 +264,10 @@ const getMoreImageResults = async () => {
   } catch (e) {
     isLoadingMoreImage.value = false;
     console.log('error', e);
+    if(e.message === 'Unauthorized'){
+      await authStore.logout();
+      await router.replace({ name: "ingreso" });
+    }
   }
 };
 
@@ -452,7 +468,7 @@ onMounted(async () => {
                                  required>
                         </div>
                         <div class="col-12 col-md-2" >
-                          <button class="text-center cursor-pointer pt-2 btn-loginv3" style="margin-top: -150px;"
+                          <button class="text-center cursor-pointer pt-2 btn-search" style="margin-top: -150px;"
                                   @click="getLabResults()">
                             Filtrar
                           </button>
@@ -558,7 +574,7 @@ onMounted(async () => {
                                  required>
                         </div>
                         <div class="col-12 col-md-2 ">
-                          <button class="text-center cursor-pointer pt-2 btn-loginv3"
+                          <button class="text-center cursor-pointer pt-2 btn-search"
                                   @click="getImageResults()">
                             Filtrar
                           </button>
@@ -819,7 +835,19 @@ a:hover {
   -moz-transition: opacity 0.3s ease-in-out;
   -webkit-transition: opacity 0.3s ease-in-out;
 }
-
+.btn-search {
+  background: linear-gradient(90deg, rgba(11, 114, 216, 1) 0%, rgba(42, 157, 255, 1) 0%, rgba(11, 114, 216, 1) 100%) !important;
+  border-radius: 50px;
+  min-width: 100%;
+  height: 50px;
+  padding: 15px 20px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  transition: all .30s linear;
+  margin-top: -50px;
+}
 /*
  * Hide the last image on hover
 */

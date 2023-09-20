@@ -10,66 +10,49 @@ useMyInvoicesStore = defineStore({
     actions: {
         async getInvoices(payload) {
             //get data from backend
-            try {
-                const response = await searchInvoices(payload);
-                console.log('response payedInvoices', response);
-                if (response.status) {
-                    this.invoices = response.data;
-                    this.limit = response.limit;
-                    this.offset = response.offset;
-                    if(response.data.length > 0){
-                        this.total = response.total;
-                    }else{
-                        this.total = 0;
-                    }
-                } else {
-                    this.invoices = [];
+            const response = await searchInvoices(payload);
+            console.log('response payedInvoices', response);
+            if (response.status) {
+                this.invoices = response.data;
+                this.limit = response.limit;
+                this.offset = response.offset;
+                if(response.data.length > 0){
+                    this.total = response.total;
+                }else{
                     this.total = 0;
-                    notify({
-                        title: 'Hubo un error',
-                        text: response.message,
-                        type: 'error'
-                    });
                 }
-
-            } catch (e) {
-                console.log('error', e);
+            } else {
+                this.invoices = [];
+                this.total = 0;
+                notify({
+                    title: 'Hubo un error',
+                    text: response.message,
+                    type: 'error'
+                });
             }
-            //this.items = [];
         },
         async getMoreInvoices(payload) {
             //get data from backend
-            try {
-                const response = await searchInvoices(payload);
-                console.log('response payedInvoices', response);
-                if (response.status) {
-                    this.invoices.concat(response.data);
-                    this.total = response.total;
-                    this.limit = response.limit;
-                    this.offset = response.offset;
-                } else {
-                    notify({
-                        title: 'Hubo un error',
-                        text: response.message,
-                        type: 'error'
-                    });
-                }
-
-            } catch (e) {
-                console.log('error', e);
+            const response = await searchInvoices(payload);
+            console.log('response payedInvoices', response);
+            if (response.status) {
+                this.invoices.concat(response.data);
+                this.total = response.total;
+                this.limit = response.limit;
+                this.offset = response.offset;
+            } else {
+                notify({
+                    title: 'Hubo un error',
+                    text: response.message,
+                    type: 'error'
+                });
             }
-            //this.items = [];
         },
         clearInvoices() {
-            try {
-                this.invoices = [];
-                this.total = 0;
-                this.limit = 25;
-                this.offset = 1;
-            } catch (e) {
-                console.log('error', e);
-            }
-            //this.items = [];
+            this.invoices = [];
+            this.total = 0;
+            this.limit = 25;
+            this.offset = 1;
         },
     },
     state: () => ({

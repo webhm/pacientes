@@ -10,65 +10,48 @@ useMyLabResultsStore = defineStore({
     getters: {},
     actions: {
         async getResults(payload) {
-            try {
-                const response = await resultadosLaboratorioPaciente(payload);
-                console.log('response lab result', response);
-                if (response.status) {
-                    this.results = response.data;
-                    this.limit = response.limit;
-                    this.offset = response.offset;
-                    if(response.data.length > 0){
-                        this.total = response.total;
-                    }else{
-                        this.total = 0;
-                    }
-
-                } else {
-                    this.results = [];
+            const response = await resultadosLaboratorioPaciente(payload);
+            if (response.status) {
+                this.results = response.data;
+                this.limit = response.limit;
+                this.offset = response.offset;
+                if(response.data.length > 0){
+                    this.total = response.total;
+                }else{
                     this.total = 0;
-                    notify({
-                        title: 'Hubo un error',
-                        text: response.message,
-                        type: 'error'
-                    });
                 }
 
-            } catch (e) {
-                console.log('error', e);
+            } else {
+                this.results = [];
+                this.total = 0;
+                notify({
+                    title: 'Hubo un error',
+                    text: response.message,
+                    type: 'error'
+                });
             }
         },
         async getMoreResults(payload) {
-            try {
-                const response = await resultadosLaboratorioPaciente(payload);
-                console.log('response lab result more', response);
-                if (response.status) {
-                    this.results.concat(response.data);
-                    this.total = response.total;
-                    this.limit = response.limit;
-                    this.offset = response.offset;
-                } else {
-                    notify({
-                        title: 'Hubo un error',
-                        text: response.message,
-                        type: 'error'
-                    });
-                }
-
-            } catch (e) {
-                console.log('error', e);
+            const response = await resultadosLaboratorioPaciente(payload);
+            console.log('response lab result more', response);
+            if (response.status) {
+                this.results.concat(response.data);
+                this.total = response.total;
+                this.limit = response.limit;
+                this.offset = response.offset;
+            } else {
+                notify({
+                    title: 'Hubo un error',
+                    text: response.message,
+                    type: 'error'
+                });
             }
         },
         clearResults() {
-            //get data from backend
-            try {
-                this.results = [];
-                this.total = 0;
-                this.limit = 25;
-                this.offset = 1;
-            } catch (e) {
-                console.log('error', e);
-            }
-            //this.items = [];
+            this.results = [];
+            this.total = 0;
+            this.limit = 25;
+            this.offset = 1;
         },
     },
     state: () => ({

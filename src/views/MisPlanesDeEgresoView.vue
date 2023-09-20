@@ -27,41 +27,64 @@ const goBack = async () => {
   await router.back();
 };
 const getHistoryForms = async (item, index) => {
-  const form = {
-    'NHC': user.value.NHC,
-    'ADM': item.ATENCION
-    //'startDate': '13-04-2023'
-  };
-  await myHistoryStore.getHistoryCheckouts(index, form);
+  try{
+    const form = {
+      'NHC': user.value.NHC,
+      'ADM': item.ATENCION
+      //'startDate': '13-04-2023'
+    };
+    await myHistoryStore.getHistoryCheckouts(index, form);
+  }catch (e) {
+    console.log('error', e);
+    if(e.message === 'Unauthorized'){
+      await authStore.logout();
+      await router.replace({ name: "ingreso" });
+    }
+  }
+}
+const toggleVisibility = async (index) => {
+  myHistoryStore.history[index].visible = !myHistoryStore.history[index].visible;
 }
 
 const getHistory = async () => {
-  isLoading.value = true;
-  myHistoryStore.limit = 25;
-  myHistoryStore.offset = 1;
-  const form = {
-    //'endDate':'13-07-2023',
-    'limit': limit.value,
-    'offset': offset.value,
-    //'searchField': '',
-    'sortField': 'FACT',
-    'sortType': 'asc',
-    'NHC': user.value.NHC,
-    //'startDate': '13-04-2023'
-  };
-  if (search.value != null) {
-    form['searchField'] = search.value;
+  try{
+    isLoading.value = true;
+    myHistoryStore.limit = 25;
+    myHistoryStore.offset = 1;
+    const form = {
+      //'endDate':'13-07-2023',
+      'limit': limit.value,
+      'offset': offset.value,
+      //'searchField': '',
+      'sortField': 'FACT',
+      'sortType': 'asc',
+      'NHC': user.value.NHC,
+      //'startDate': '13-04-2023'
+    };
+    if (search.value != null) {
+      form['searchField'] = search.value;
+    }
+    if (start.value != null) {
+      form['startDate'] = start.value;
+    }
+    if (end.value != null) {
+      form['endDate'] = end.value;
+    }
+    console.log('form', form);
+    console.log('value nhc', user.value.NHC);
+    await myHistoryStore.getHistory(form);
+    for(let i = 0; i < history.value.length; i++){
+      getHistoryForms(history.value[i], i);
+    }
+    isLoading.value = false;
+  }catch (e) {
+    isLoading.value = false;
+    console.log('error', e);
+    if(e.message === 'Unauthorized'){
+      await authStore.logout();
+      await router.replace({ name: "ingreso" });
+    }
   }
-  if (start.value != null) {
-    form['startDate'] = start.value;
-  }
-  if (end.value != null) {
-    form['endDate'] = end.value;
-  }
-  console.log('form', form);
-  console.log('value nhc', user.value.NHC);
-  await myHistoryStore.getHistory(form);
-  isLoading.value = false;
 };
 const getMoreHistory = async () => {
   try {
@@ -89,9 +112,16 @@ const getMoreHistory = async () => {
     console.log('form', form);
     await myHistoryStore.getMoreHistory(form);
     isLoadingMore.value = false;
+    for(let i = 0; i < history.value.length; i++){
+      getHistoryForms(history.value[i], i);
+    }
   } catch (e) {
     isLoadingMore.value = false;
     console.log('error', e);
+    if(e.message === 'Unauthorized'){
+      await authStore.logout();
+      await router.replace({ name: "ingreso" });
+    }
   }
 };
 
@@ -196,65 +226,74 @@ onMounted(async () => {
 
               <template v-if="history.length >0">
                 <template v-for="(history, i) in history" v-bind:key="i">
-                  <div
-                      class="p-2 text-left border-result cursor-pointer" @click="getHistoryForms(history, i)">
-                    <div class="row">
-                      <div class="col-10">
-                        <div class="p-3">
-                          <p class="title-results title-colapse">
-                            <b>Fecha Atención: </b>{{
-                              history.FECHA_ATENCION
-                            }}
-                          </p>
-                          <p class="title-results title-colapse">
-                            <b>Médico: </b>{{
-                              history.MED_FOR
-                            }}
-                          </p>
-                          <p class="title-results title-colapse">
-                            <b>Número Historia Clínica: </b>{{
-                              history.NHC
-                            }}
-                          </p>
-                          <p class="title-results title-colapse" v-if="history.ATENCION">
-                            <b>Número de Atención: </b>{{
-                              history.ATENCION
-                            }}
-                          </p>
+                  <template v-if="history.visibleFull">
+                    <div
+                        class="p-2 text-left border-result cursor-pointer" @click="toggleVisibility(i)">
+                      <div class="row">
+                        <div class="col-10">
+                          <div class="p-3">
+                            <p class="title-results title-colapse">
+                              <b>Fecha Atención: </b>{{
+                                history.FECHA_ATENCION
+                              }}
+                            </p>
+                            <p class="title-results title-colapse">
+                              <b>Médico: </b>{{
+                                history.MED_FOR
+                              }}
+                            </p>
+                            <p class="title-results title-colapse">
+                              <b>Número Historia Clínica: </b>{{
+                                history.NHC
+                              }}
+                            </p>
+                            <p class="title-results title-colapse" v-if="history.ATENCION">
+                              <b>Número de Atención: </b>{{
+                                history.ATENCION
+                              }}
+                            </p>
 
+                          </div>
                         </div>
-                      </div>
-                      <div class="col-2">
-                        <div class="cursor-pointer" title="Ver resultado"
-                             style="display: inline-block;"
-                        >
-                          <div class="p-2 p-md-4">
-                            <font-awesome-icon :icon="['fas', 'eye']" size="2x"
-                                               class="icon-device"/>
+                        <div class="col-2">
+                          <div class="cursor-pointer" title="Ver resultado"
+                               style="display: inline-block;"
+                          >
+                            <div class="p-2 p-md-4">
+                              <font-awesome-icon :icon="['fas', 'eye']" size="2x"
+                                                 class="icon-device"/>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div :class="{'form-show': history.visible, 'form-hidden': !history.visible, }">
-                      <template v-if="history.isLoading">
-                        <div class="my-1 p-3 text-center">
-                          <img class="img-fluid" src="@/assets/loading.gif"
-                               alt="Loading Hm">
-                        </div>
-                      </template>
-                      <template v-else>
-                        <div class="p-3">
-                          <template v-if="history.forms.length > 0">
-                            <post-egreso-viewer :form="history.forms[0]"/>
-                          </template>
-                          <template v-else>
-                            <p>No tienes atenciones recientes</p>
-                          </template>
+                      <div :class="{'form-show': history.visible, 'form-hidden': !history.visible, }">
+                        <template v-if="history.isLoading">
+                          <div class="my-1 p-3 text-center">
+                            <img class="img-fluid" src="@/assets/loading.gif"
+                                 alt="Loading Hm">
+                          </div>
+                        </template>
+                        <template v-else>
+                          <div class="p-3">
+                            <template v-if="history.forms.length > 0">
+                              <post-egreso-viewer :form="history.forms[0]"/>
+                            </template>
+                            <template v-else>
+                              <p>No tienes atenciones recientes</p>
+                            </template>
 
-                        </div>
-                      </template>
+                          </div>
+                        </template>
+                      </div>
                     </div>
-                  </div>
+                  </template>
+                  <template v-else>
+                    <div class="my-1 p-3 text-center">
+                      <img class="img-fluid" src="@/assets/loading.gif"
+                           alt="Loading Hm">
+                    </div>
+                  </template>
+
                 </template>
                 <div class="text-center py-3" v-if="isLoadingMore">
                   <p class="title-results " style="font-size: medium;"><b>Cargando más resultados...</b></p>

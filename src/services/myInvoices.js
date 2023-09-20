@@ -3,7 +3,7 @@ import {mande, defaults} from 'mande';
 const baseURL = 'https://api.hospitalmetropolitano.org/v1';
 
 export function searchInvoices(data) {
-    const patients = mande(`${baseURL}/paciente/facturas`);
+    const patients = mande(`${baseURL}/paciente/facturas`, );
     return patients.post(data);
 }
 

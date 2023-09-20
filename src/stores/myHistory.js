@@ -10,97 +10,67 @@ useMyHistoryStore = defineStore({
     getters: {},
     actions: {
         async getHistory(payload) {
-            //get data from backend
-            try {
-                const response = await historialAtencionesPaciente(payload );
-                if(response.status){
-                    this.history = response.data.map((element) => {
-                        return {
-                            ...element,
-                            visible: false,
-                            isLoading: true,
-                            forms: []
-                        }
-                    });
-                    this.total = response.total;
-                    this.limit = response.limit;
-                    this.offset = response.offset;
-                }else{
-                    this.history = [];
-                    notify({
-                        title: 'Hubo un error',
-                        text: response.message,
-                        type: 'error'
-                    });
-                }
-                console.log('response Checkouts', this.history);
-            } catch (e) {
-                console.log('error', e);
+            const response = await historialAtencionesPaciente(payload );
+            if(response.status){
+                this.history = response.data.map((element) => {
+                    return {
+                        ...element,
+                        visible: false,
+                        visibleFull: false,
+                        isLoading: true,
+                        forms: []
+                    }
+                });
+                this.total = response.total;
+                this.limit = response.limit;
+                this.offset = response.offset;
+            }else{
+                this.history = [];
                 notify({
                     title: 'Hubo un error',
-                    text: e,
+                    text: response.message,
                     type: 'error'
                 });
             }
-            //this.items = [];
+            console.log('response Checkouts', this.history);
         },
         async getMoreHistory(payload) {
-            //get data from backend
-            try {
-                const response = await historialAtencionesPaciente(payload );
-                if(response.status){
-                    this.history.concat(response.data.map((element) => {
-                        return {
-                            ...element,
-                            visible: false,
-                            isLoading: true,
-                            forms: []
-                        }
-                    }));
-                    this.total = response.total;
-                    this.limit = response.limit;
-                    this.offset = response.offset;
-                }else{
+            const response = await historialAtencionesPaciente(payload );
+            if(response.status){
+                this.history.concat(response.data.map((element) => {
+                    return {
+                        ...element,
+                        visible: false,
+                        visibleFull: false,
+                        isLoading: true,
+                        forms: []
+                    }
+                }));
+                this.total = response.total;
+                this.limit = response.limit;
+                this.offset = response.offset;
+            }else{
 
-                    notify({
-                        title: 'Hubo un error',
-                        text: response.message,
-                        type: 'error'
-                    });
-                }
-                console.log('response Checkouts', this.history);
-            } catch (e) {
-                console.log('error', e);
                 notify({
                     title: 'Hubo un error',
-                    text: e,
+                    text: response.message,
                     type: 'error'
                 });
             }
-            //this.items = [];
+            console.log('response Checkouts', this.history);
         },
         async getHistoryCheckouts(index, payload){
-            if(this.history[index].visible){
-                this.history[index].visible = !this.history[index].visible;
-            }else{
-                this.history[index].visible = !this.history[index].visible;
-                this.history[index].isLoading = true;
-                this.history[index].forms = await searchCheckouts(payload );
-                this.history[index].isLoading = false;
-            }
+            this.history[index].isLoading = true;
+            this.history[index].forms = await searchCheckouts(payload );
+            this.history[index].isLoading = false;
+            this.history[index].visibleFull = true;
 
         },
         clearHistory() {
-            //get data from backend
-            try {
-                this.history = [];
-                this.total = 0;
-                this.limit = 25;
-                this.offset = 1;
-            } catch (e) {
-                console.log('error', e);
-            }
-            //this.items = [];
+            this.history = [];
+            this.total = 0;
+            this.limit = 25;
+            this.offset = 1;
         },
     },
     state: () => ({

@@ -22,34 +22,42 @@ let receptor = ref(null);
 const router = useRouter();
 
 const getPaths = async () => {
-  isLoading.value = true;
-  const form = {
-    //'endDate':'13-07-2023',
-    'limit': limit.value,
-    'offset': offset.value,
-    //'searchField': '',
-    'sortField': 'FACT',
-    'sortType': 'asc',
-    'NHC': user.value.NHC,
-    //'startDate': '13-04-2023'
-  };
-  if (search.value != null) {
-    form['searchField'] = search.value;
+  try{
+    isLoading.value = true;
+    const form = {
+      //'endDate':'13-07-2023',
+      'limit': limit.value,
+      'offset': offset.value,
+      //'searchField': '',
+      'sortField': 'FACT',
+      'sortType': 'asc',
+      'NHC': user.value.NHC,
+      //'startDate': '13-04-2023'
+    };
+    if (search.value != null) {
+      form['searchField'] = search.value;
+    }
+    if (start.value != null) {
+      form['startDate'] = start.value;
+    }
+    if (end.value != null) {
+      form['endDate'] = end.value;
+    }
+    console.log('fomr', form);
+    await patientPathStore.searchPatientPath(form);
+    isLoading.value = false;
+    console.log('paths', paths.value);
+    paths.value.forEach((path, key) => {
+      patientPathStore.getSubscribed(key, user.value.NHC);
+    });
+    console.log('paths', paths.value);
+  }catch (e) {
+    console.log('error', e);
+    if(e.message === 'Unauthorized'){
+      await authStore.logout();
+      await router.replace({ name: "ingreso" });
+    }
   }
-  if (start.value != null) {
-    form['startDate'] = start.value;
-  }
-  if (end.value != null) {
-    form['endDate'] = end.value;
-  }
-  console.log('fomr', form);
-  await patientPathStore.searchPatientPath(form);
-  isLoading.value = false;
-  console.log('paths', paths.value);
-  paths.value.forEach((path, key) => {
-    patientPathStore.getSubscribed(key, user.value.NHC);
-  });
-  console.log('paths', paths.value);
 };
 
 const goBack = async () => {
@@ -60,32 +68,44 @@ const goBack = async () => {
   }
 }
 const subscribe = async (index, NHC) => {
-  if (paths.value[index].subscribed.length < 2) {
-    await patientPathStore.updateSubscribed(index,
-        {
-          type: type.value,
-          receptor: receptor.value,
-        }, NHC);
-    type.value = null;
-    receptor.value = null;
-    // paths.value.forEach((path, key) => {
-    //   patientPathStore.getSubscribed(key, user.value.NHC);
-    // });
-  } else {
-    notify({
-      title: 'Atención',
-      text: 'No puedes agregar más de 2 receptores',
-      type: 'error'
-    });
+  try {
+    if (paths.value[index].subscribed.length < 2) {
+      await patientPathStore.updateSubscribed(index,
+          {
+            type: type.value,
+            receptor: receptor.value,
+          }, NHC);
+      type.value = null;
+      receptor.value = null;
+      // paths.value.forEach((path, key) => {
+      //   patientPathStore.getSubscribed(key, user.value.NHC);
+      // });
+    } else {
+      notify({
+        title: 'Atención',
+        text: 'No puedes agregar más de 2 receptores',
+        type: 'error'
+      });
+    }
+  }catch (e) {
+    console.log('error', e);
+    if(e.message === 'Unauthorized'){
+      await authStore.logout();
+      await router.replace({ name: "ingreso" });
+    }
   }
-
 };
 
 const deleteSubscribe = async (path, index, NHC) => {
-  console.log('path', path);
-  console.log('index', index);
-  console.log('NHC', NHC);
-  await patientPathStore.deleteSubscribed(path, index, NHC);
+  try {
+    await patientPathStore.deleteSubscribed(path, index, NHC);
+  }catch (e) {
+    console.log('error', e);
+    if(e.message === 'Unauthorized'){
+      await authStore.logout();
+      await router.replace({ name: "ingreso" });
+    }
+  }
 };
 
 onMounted(async () => {

@@ -3,8 +3,14 @@ const baseURLV1 = 'https://api.hospitalmetropolitano.org/v1';
 
 
 export function resultadosLaboratorioPaciente(req) {
-  const patients = mande(  `${baseURLV1}/resultados/lab`);
-  return patients.post(req);
+  try{
+    const patients = mande(  `${baseURLV1}/resultados/lab`);
+    return patients.post(req);
+  }catch (e) {
+    console.log('er', e);
+    console.log('er', e.status);
+    console.log('er', e.statusCode);
+  }
 }
 
 export function resultadosImagenPaciente(req) {

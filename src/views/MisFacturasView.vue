@@ -56,7 +56,11 @@ const getInvoices = async () => {
     isLoading.value = false;
   }catch (e) {
     isLoading.value = false;
-    console.log('error', e);
+    console.log('error', e.message );
+    if(e.message === 'Unauthorized'){
+      await authStore.logout();
+      await router.replace({ name: "ingreso" });
+    }
   }
 };
 const getMoreInvoices = async () => {
@@ -82,6 +86,10 @@ const getMoreInvoices = async () => {
   } catch (e) {
     isLoadingMore.value = false;
     console.log('error', e);
+    if(e.message === 'Unauthorized'){
+      await authStore.logout();
+      await router.replace({ name: "ingreso" });
+    }
   }
 };
 
