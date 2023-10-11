@@ -126,7 +126,7 @@ const searchInFormById = (key) => {
       <div class="col-6 ">
         <div class="row">
           <div class="col-6 cells text-informe">{{ searchInForm("identificacion_paciente") }}</div>
-          <div class="col-6 cells text-informe "><p>{{ searchInForm("Estado Civil") }}</p></div>
+          <div class="col-6 cells text-informe "><p>{{ searchInForm("estado_civil_paciente") }}</p></div>
 
         </div>
       </div>
@@ -171,7 +171,7 @@ const searchInFormById = (key) => {
       </div>
     </div>
     <div class="row">
-      <div class="col-12 cells text-informe" v-html="searchInForm('madetso')+searchInForm('madetso_2')"></div>
+      <div class="col-12 cells text-informe" v-html="searchInForm('madetso')+searchInForm('madetso_2')+searchInForm('madetso_1')"></div>
     </div>
     <div class="row" style="background-color:#edfbf5;">
       <div class="col-12 cells text-informe"><b>EDUCACIÓN AL CUIDADOR</b></div>
@@ -179,24 +179,24 @@ const searchInFormById = (key) => {
     <div class="row">
       <div class="col-4">
         <div class="row">
-          <div class="col-12 cells text-informe"><p><b>Equipamento:</b> {{ searchInFormById("RB_1494___V142") }}</p>
+          <div class="col-12 cells text-informe"><p><b>Equipamento:</b> {{ searchInFormById("RB_1494___V177") }}</p>
           </div>
-          <div class="col-12 cells text-informe"><p><b>Terapia lenguaje:</b> {{ searchInFormById("RB_1494___V143") }}
+          <div class="col-12 cells text-informe"><p><b>Terapia lenguaje:</b> {{ searchInFormById("RB_1494___V178") }}
           </p></div>
-          <div class="col-12 cells text-informe"><p><b>Otros:</b> {{ searchInFormById("RB_1494___V145") }}</p></div>
+          <div class="col-12 cells text-informe"><p><b>Otros:</b> {{ searchInFormById("RB_1494___V179") }}</p></div>
         </div>
       </div>
       <div class="col-8 ">
         <div class="row">
-          <div class="col-6 cells text-informe"><p><b>Terapia respiratoria:</b> {{ searchInFormById("RB_1494___V144") }}
+          <div class="col-6 cells text-informe"><p><b>Terapia respiratoria:</b> {{ searchInFormById("RB_1494___V180") }}
           </p></div>
-          <div class="col-6 cells text-informe"><p><b>Terapia física:</b> {{ searchInFormById("RB_1494___V146") }}</p>
+          <div class="col-6 cells text-informe"><p><b>Terapia física:</b> {{ searchInFormById("RB_1494___V181") }}</p>
           </div>
         </div>
         <div class="row">
-          <div class="col-6 cells text-informe"><p><b>Curación de heridas:</b> {{ searchInFormById("RB_1494___V147") }}
+          <div class="col-6 cells text-informe"><p><b>Curación de heridas:</b> {{ searchInFormById("RB_1494___V182") }}
           </p></div>
-          <div class="col-6 cells text-informe"><p><b>Manejo de ostomías:</b> {{ searchInFormById("RB_1494___V148") }}
+          <div class="col-6 cells text-informe"><p><b>Manejo de ostomías:</b> {{ searchInFormById("RB_1494___V183") }}
           </p></div>
 
         </div>
@@ -352,7 +352,7 @@ const searchInFormById = (key) => {
         {{ searchInForm("identificacion_paciente") }}
       </div>
       <div class="col-6 cells text-informe">
-        {{ searchInForm("Estado Civil") }}
+        {{ searchInForm("estado_civil_paciente") }}
       </div>
     </div>
 
@@ -413,7 +413,7 @@ const searchInFormById = (key) => {
         <div v-html="searchInForm('diagnosticos_egreso_texto')"></div>
       </div>
       <div class="col-12 cells text-informe">
-        <div v-html="searchInForm('madetso')+searchInForm('madetso_2')"></div>
+        <div v-html="searchInForm('madetso')+searchInForm('madetso_2')+searchInForm('madetso_1')"></div>
       </div>
     </div>
 
@@ -422,25 +422,25 @@ const searchInFormById = (key) => {
         <b>EDUCACIÓN AL CUIDADOR</b>
       </div>
       <div class="col-12 cells text-informe">
-        <b>Equipamento:</b> {{ searchInFormById("RB_1494___V142") }}
+        <b>Equipamento:</b> {{ searchInFormById("RB_1494___V177") }}
       </div>
       <div class="col-12 cells text-informe">
-        <b>Terapia respiratoria:</b> {{ searchInFormById("RB_1494___V144") }}
+        <b>Terapia respiratoria:</b> {{ searchInFormById("RB_1494___V178") }}
       </div>
       <div class="col-12 cells text-informe">
-        <b>Curación de heridas:</b> {{ searchInFormById("RB_1494___V147") }}
+        <b>Curación de heridas:</b> {{ searchInFormById("RB_1494___V179") }}
       </div>
       <div class="col-12 cells text-informe">
-        <b>Terapia lenguaje:</b> {{ searchInFormById("RB_1494___V143") }}
+        <b>Terapia lenguaje:</b> {{ searchInFormById("RB_1494___V180") }}
       </div>
       <div class="col-12 cells text-informe">
-        <b>Terapia física:</b> {{ searchInFormById("RB_1494___V146") }}
+        <b>Terapia física:</b> {{ searchInFormById("RB_1494___V181") }}
       </div>
       <div class="col-12 cells text-informe">
-        <b>Manejo de ostomías:</b> {{ searchInFormById("RB_1494___V148") }}
+        <b>Manejo de ostomías:</b> {{ searchInFormById("RB_1494___V182") }}
       </div>
       <div class="col-12 cells text-informe">
-        <b>Otros:</b> {{ searchInFormById("RB_1494___V145") }}
+        <b>Otros:</b> {{ searchInFormById("RB_1494___V183") }}
       </div>
       <div class="col-12 cells text-informe">
         {{ searchInForm("txt_otros") }}
