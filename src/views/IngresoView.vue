@@ -952,11 +952,11 @@ onMounted(async () => {
           <!--columna de iframe-->
           <div class="col-12 col-md-5 mb-md-4">
             <div class="px-2 mt-5 pt-8">
-              <iframe width="100%" height="300" src="https://www.youtube.com/embed/t0zKd0QUxyY?controls=0"
-                      title="MetroVirtual" frameborder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowfullscreen></iframe>
-              <p style="text-align: center;">¿Qué es MetroVirtual pacientes?</p>
+<!--              <iframe width="100%" height="300" src="https://www.youtube.com/embed/t0zKd0QUxyY?controls=0"-->
+<!--                      title="MetroVirtual" frameborder="0"-->
+<!--                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"-->
+<!--                      allowfullscreen></iframe>-->
+<!--              <p style="text-align: center;">¿Qué es MetroVirtual pacientes?</p>-->
             </div>
           </div>
         </div>
@@ -985,21 +985,21 @@ onMounted(async () => {
     </div>
     <div class="row mb-4 mb-md-2 justify-content-center  pb-5 mt-5 my-5">
       <!--columna de iconos-->
-      <div class=" col-6 col-md-3 d-block pb-5 ">
-        <div class="icon-img cursor-pointer" @click="goTo('agendar-cita')">
-          <div class="row d-block img-border">
-            <span class="color-active"><i class="fa fa-circle" aria-hidden="true"></i></span>
-            <img class="img-icon-color" src="@/assets/agendar-blanco.png" alt=" icon">
-            <img class="img-icon-color color-margin" src="@/assets/agendar.png" alt=" icon" >
-            <br>
-          </div>
-          <p class="d-block text-icon-color mt-3">
-            Agendar Cita <br>
-            <span>*Examen de Imagen</span> <br>
-            <span>*Laboratorio a Domicilio</span>
-          </p>
-        </div>
-      </div>
+<!--      <div class=" col-6 col-md-3 d-block pb-5 ">-->
+<!--        <div class="icon-img cursor-pointer" @click="goTo('agendar-cita')">-->
+<!--          <div class="row d-block img-border">-->
+<!--            <span class="color-active"><i class="fa fa-circle" aria-hidden="true"></i></span>-->
+<!--            <img class="img-icon-color" src="@/assets/agendar-blanco.png" alt=" icon">-->
+<!--            <img class="img-icon-color color-margin" src="@/assets/agendar.png" alt=" icon" >-->
+<!--            <br>-->
+<!--          </div>-->
+<!--          <p class="d-block text-icon-color mt-3">-->
+<!--            Agendar Cita <br>-->
+<!--            <span>*Examen de Imagen</span> <br>-->
+<!--            <span>*Laboratorio a Domicilio</span>-->
+<!--          </p>-->
+<!--        </div>-->
+<!--      </div>-->
 
       <!--columna de iconos-->
       <div class=" col-6 col-md-3 d-block pb-5">
