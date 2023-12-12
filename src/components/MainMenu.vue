@@ -78,49 +78,49 @@ onMounted(() => {
           }}</span>
       </div>
 
-      <div @click="goTo('agendar-cita')"
-           class="cursor-pointer p-2 d-flex justify-content-end item-header">
-        <img class="icon icon--small my-2 mx-2"
-             src="@/assets/icon-menu-agendar.png"
-             width="23" height="26" alt="Phone">
-        <span
-            class="inside-item p-2 mx-2">{{
-            language === "es" ? "Agendar Cita" : "Make An Appointment"
-          }}</span>
-      </div>
+<!--      <div @click="goTo('agendar-cita')"-->
+<!--           class="cursor-pointer p-2 d-flex justify-content-end item-header">-->
+<!--        <img class="icon icon&#45;&#45;small my-2 mx-2"-->
+<!--             src="@/assets/icon-menu-agendar.png"-->
+<!--             width="23" height="26" alt="Phone">-->
+<!--        <span-->
+<!--            class="inside-item p-2 mx-2">{{-->
+<!--            language === "es" ? "Agendar Cita" : "Make An Appointment"-->
+<!--          }}</span>-->
+<!--      </div>-->
 
-      <div @click="goTo('ruta-del-paciente')"
-           class="cursor-pointer p-2 d-flex justify-content-end item-header">
-        <img class="icon icon--small my-2 mx-2"
-             src="@/assets/ruta-del-paciente.png"
-             width="23" height="26" alt="Phone">
-        <span
-            class="inside-item p-2 mx-2">{{
-            language === "es" ? "Ruta del Paciente" : "Patient Path"
-          }}</span>
-      </div>
+<!--      <div @click="goTo('ruta-del-paciente')"-->
+<!--           class="cursor-pointer p-2 d-flex justify-content-end item-header">-->
+<!--        <img class="icon icon&#45;&#45;small my-2 mx-2"-->
+<!--             src="@/assets/ruta-del-paciente.png"-->
+<!--             width="23" height="26" alt="Phone">-->
+<!--        <span-->
+<!--            class="inside-item p-2 mx-2">{{-->
+<!--            language === "es" ? "Ruta del Paciente" : "Patient Path"-->
+<!--          }}</span>-->
+<!--      </div>-->
 
-      <div @click="goTo('mis-planes-de-egreso')"
-           class="cursor-pointer p-2 d-flex justify-content-end item-header">
-        <img class="icon icon--small my-2 mx-2"
-             src="@/assets/post-egresos.png"
-             width="23" height="26" alt="Phone">
-        <span
-            class="inside-item p-2 mx-2">{{
-            language === "es" ? "Mis Planes de Egreso" : "My Checkout Plans"
-          }}</span>
-      </div>
+<!--      <div @click="goTo('mis-planes-de-egreso')"-->
+<!--           class="cursor-pointer p-2 d-flex justify-content-end item-header">-->
+<!--        <img class="icon icon&#45;&#45;small my-2 mx-2"-->
+<!--             src="@/assets/post-egresos.png"-->
+<!--             width="23" height="26" alt="Phone">-->
+<!--        <span-->
+<!--            class="inside-item p-2 mx-2">{{-->
+<!--            language === "es" ? "Mis Planes de Egreso" : "My Checkout Plans"-->
+<!--          }}</span>-->
+<!--      </div>-->
 
-      <div @click="goTo('buzon-de-sugerencias')"
-           class="cursor-pointer p-2 d-flex justify-content-end item-header">
-        <img class="icon icon--small my-2 mx-2"
-             src="@/assets/icon-menu-buzon.png"
-             width="25" height="28" alt="Phone">
-        <span
-            class="inside-item p-2 mx-2">{{
-            language === "es" ? "Buzón de Sugerencias" : "Suggestions Mailbox"
-          }}</span>
-      </div>
+<!--      <div @click="goTo('buzon-de-sugerencias')"-->
+<!--           class="cursor-pointer p-2 d-flex justify-content-end item-header">-->
+<!--        <img class="icon icon&#45;&#45;small my-2 mx-2"-->
+<!--             src="@/assets/icon-menu-buzon.png"-->
+<!--             width="25" height="28" alt="Phone">-->
+<!--        <span-->
+<!--            class="inside-item p-2 mx-2">{{-->
+<!--            language === "es" ? "Buzón de Sugerencias" : "Suggestions Mailbox"-->
+<!--          }}</span>-->
+<!--      </div>-->
 
       <div @click="logout()"
            class="cursor-pointer p-2 d-flex justify-content-end item-header"
@@ -155,49 +155,49 @@ onMounted(() => {
           }}</span>
       </div>
 
-      <div @click="goTo('agendar-cita')"
-           class="cursor-pointer p-2 d-flex justify-content-end item-header">
-        <img class="icon icon--small my-2 mx-2"
-             src="@/assets/icon-menu-agendar.png"
-             width="23" height="26" alt="Phone">
-        <span
-            class="inside-item p-2 mx-2">{{
-            language === "es" ? "Agendar Cita" : "Make An Appointment"
-          }}</span>
-      </div>
-      <div @click="goTo('ruta-del-paciente')"
-           class="cursor-pointer p-2 d-flex justify-content-end item-header">
-        <img class="icon icon--small my-2 mx-2"
-             src="@/assets/ruta-del-paciente.png"
-             width="23" height="26" alt="Phone">
-        <span
-            class="inside-item p-2 mx-2">{{
-            language === "es" ? "Ruta del Paciente" : "Patient Path"
-          }}</span>
-      </div>
+<!--      <div @click="goTo('agendar-cita')"-->
+<!--           class="cursor-pointer p-2 d-flex justify-content-end item-header">-->
+<!--        <img class="icon icon&#45;&#45;small my-2 mx-2"-->
+<!--             src="@/assets/icon-menu-agendar.png"-->
+<!--             width="23" height="26" alt="Phone">-->
+<!--        <span-->
+<!--            class="inside-item p-2 mx-2">{{-->
+<!--            language === "es" ? "Agendar Cita" : "Make An Appointment"-->
+<!--          }}</span>-->
+<!--      </div>-->
+<!--      <div @click="goTo('ruta-del-paciente')"-->
+<!--           class="cursor-pointer p-2 d-flex justify-content-end item-header">-->
+<!--        <img class="icon icon&#45;&#45;small my-2 mx-2"-->
+<!--             src="@/assets/ruta-del-paciente.png"-->
+<!--             width="23" height="26" alt="Phone">-->
+<!--        <span-->
+<!--            class="inside-item p-2 mx-2">{{-->
+<!--            language === "es" ? "Ruta del Paciente" : "Patient Path"-->
+<!--          }}</span>-->
+<!--      </div>-->
 
-      <div @click="goTo('mis-planes-de-egreso')"
-           class="cursor-pointer p-2 d-flex justify-content-end item-header">
-        <img class="icon icon--small my-2 mx-2"
-             src="@/assets/post-egresos.png"
-             width="23" height="26" alt="Phone">
-        <span
-            class="inside-item p-2 mx-2">{{
-            language === "es" ? "Mis Planes de Egreso" : "My Checkout Plans"
-          }}</span>
-      </div>
+<!--      <div @click="goTo('mis-planes-de-egreso')"-->
+<!--           class="cursor-pointer p-2 d-flex justify-content-end item-header">-->
+<!--        <img class="icon icon&#45;&#45;small my-2 mx-2"-->
+<!--             src="@/assets/post-egresos.png"-->
+<!--             width="23" height="26" alt="Phone">-->
+<!--        <span-->
+<!--            class="inside-item p-2 mx-2">{{-->
+<!--            language === "es" ? "Mis Planes de Egreso" : "My Checkout Plans"-->
+<!--          }}</span>-->
+<!--      </div>-->
 
 
-      <div @click="goTo('buzon-de-sugerencias')"
-           class="cursor-pointer p-2 d-flex justify-content-end item-header">
-        <img class="icon icon--small my-2 mx-2"
-             src="@/assets/icon-menu-buzon.png"
-             width="25" height="28" alt="Phone">
-        <span
-            class="inside-item p-2 mx-2">{{
-            language === "es" ? "Buzón de Sugerencias" : "Suggestions Mailbox"
-          }}</span>
-      </div>
+<!--      <div @click="goTo('buzon-de-sugerencias')"-->
+<!--           class="cursor-pointer p-2 d-flex justify-content-end item-header">-->
+<!--        <img class="icon icon&#45;&#45;small my-2 mx-2"-->
+<!--             src="@/assets/icon-menu-buzon.png"-->
+<!--             width="25" height="28" alt="Phone">-->
+<!--        <span-->
+<!--            class="inside-item p-2 mx-2">{{-->
+<!--            language === "es" ? "Buzón de Sugerencias" : "Suggestions Mailbox"-->
+<!--          }}</span>-->
+<!--      </div>-->
     </template>
   </div>
 </template>

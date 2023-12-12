@@ -642,29 +642,29 @@ onMounted(async () => {
                   </p>
                 </div>
               </div>
-              <div class="row my-1 mt-4">
-                <div class="col-12 col-md-7">
-                  <p class="text-center my-2">
-                    <b>disponible en:</b>
-                  </p>
-                  <div class="row">
-                    <div class="col-6">
-                      <a class="d-flex justify-content-center cursor-pointer "
-                         href="#" target="_blank">
-                        <img src="@/assets/google_play.png" alt="Mundometro icon"
-                             width="100%" height="auto ">
-                      </a>
-                    </div>
-                    <div class="col-6">
-                      <a class="d-flex justify-content-center cursor-pointer" target="_blank"
-                         href="https://play.google.com/store/apps/details?id=com.metrovirtual.patients" >
-                        <img src="@/assets/app_store.png" alt="Mundometro icon"
-                             width="100%" height="auto ">
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+<!--              <div class="row my-1 mt-4">-->
+<!--                <div class="col-12 col-md-7">-->
+<!--                  <p class="text-center my-2">-->
+<!--                    <b>disponible en:</b>-->
+<!--                  </p>-->
+<!--                  <div class="row">-->
+<!--                    <div class="col-6">-->
+<!--                      <a class="d-flex justify-content-center cursor-pointer "-->
+<!--                         href="#" target="_blank">-->
+<!--                        <img src="@/assets/google_play.png" alt="Mundometro icon"-->
+<!--                             width="100%" height="auto ">-->
+<!--                      </a>-->
+<!--                    </div>-->
+<!--                    <div class="col-6">-->
+<!--                      <a class="d-flex justify-content-center cursor-pointer" target="_blank"-->
+<!--                         href="https://play.google.com/store/apps/details?id=com.metrovirtual.patients" >-->
+<!--                        <img src="@/assets/app_store.png" alt="Mundometro icon"-->
+<!--                             width="100%" height="auto ">-->
+<!--                      </a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
 
 
             </template>
@@ -952,11 +952,11 @@ onMounted(async () => {
           <!--columna de iframe-->
           <div class="col-12 col-md-5 mb-md-4">
             <div class="px-2 mt-5 pt-8">
-<!--              <iframe width="100%" height="300" src="https://www.youtube.com/embed/t0zKd0QUxyY?controls=0"-->
-<!--                      title="MetroVirtual" frameborder="0"-->
-<!--                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"-->
-<!--                      allowfullscreen></iframe>-->
-<!--              <p style="text-align: center;">¿Qué es MetroVirtual pacientes?</p>-->
+              <iframe width="100%" height="300" src="https://www.youtube.com/embed/t0zKd0QUxyY?controls=0"
+                      title="MetroVirtual" frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowfullscreen></iframe>
+              <p style="text-align: center;">¿Qué es MetroVirtual pacientes?</p>
             </div>
           </div>
         </div>
@@ -1002,18 +1002,18 @@ onMounted(async () => {
 <!--      </div>-->
 
       <!--columna de iconos-->
-      <div class=" col-6 col-md-3 d-block pb-5">
-        <div class="icon-img cursor-pointer" @click="goTo('buzon-de-sugerencias')">
-          <div class="row d-block img-border">
-            <img class="img-icon-color" src="@/assets/buzon-blanco.png" alt=" icon">
-            <img class="img-icon-color color-margin" src="@/assets/buzon.png" alt=" icon">
-            <br>
-          </div>
-          <p class="d-block mt-3 text-icon-color">Buzón<br>
-            de Sugerencias
-          </p>
-        </div>
-      </div>
+<!--      <div class=" col-6 col-md-3 d-block pb-5">-->
+<!--        <div class="icon-img cursor-pointer" @click="goTo('buzon-de-sugerencias')">-->
+<!--          <div class="row d-block img-border">-->
+<!--            <img class="img-icon-color" src="@/assets/buzon-blanco.png" alt=" icon">-->
+<!--            <img class="img-icon-color color-margin" src="@/assets/buzon.png" alt=" icon">-->
+<!--            <br>-->
+<!--          </div>-->
+<!--          <p class="d-block mt-3 text-icon-color">Buzón<br>-->
+<!--            de Sugerencias-->
+<!--          </p>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
   </div>
 </template>

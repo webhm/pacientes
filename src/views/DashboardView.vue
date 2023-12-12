@@ -102,18 +102,18 @@ const goTo = async (name) => {
 <!--            </p>-->
 <!--          </div>-->
 <!--        </div>-->
-        <div class=" col-6 col-md-3 d-block pb-5">
-          <div class="icon-img cursor-pointer" @click="goTo('buzon-de-sugerencias')">
-            <div class="row d-block img-border">
-              <img class="img-icon-color" src="@/assets/buzon-blanco.png" alt=" icon">
-              <img class="img-icon-color color-margin" src="@/assets/buzon.png" alt=" icon" >
-              <br>
-            </div>
-            <p class="d-block mt-3 text-icon-color">Buzón<br>
-              de Sugerencias
-            </p>
-          </div>
-        </div>
+<!--        <div class=" col-6 col-md-3 d-block pb-5">-->
+<!--          <div class="icon-img cursor-pointer" @click="goTo('buzon-de-sugerencias')">-->
+<!--            <div class="row d-block img-border">-->
+<!--              <img class="img-icon-color" src="@/assets/buzon-blanco.png" alt=" icon">-->
+<!--              <img class="img-icon-color color-margin" src="@/assets/buzon.png" alt=" icon" >-->
+<!--              <br>-->
+<!--            </div>-->
+<!--            <p class="d-block mt-3 text-icon-color">Buzón<br>-->
+<!--              de Sugerencias-->
+<!--            </p>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
 <!--      <div class="row mb-2 justify-content-center  pb-2 my-3">-->
 <!--        &lt;!&ndash;columna de planes de egreso&ndash;&gt;-->
