@@ -47,11 +47,20 @@ const getInvoices = async () => {
       form['searchField'] = search.value;
     }
     if(start.value != null){
-      form['startDate'] = start.value;
+      const fechaInicial = new Date(start.value);
+      const diaInicial = fechaInicial.getUTCDate().toString().padStart(2, '0');
+      const mesInicial = (fechaInicial.getUTCMonth() + 1).toString().padStart(2, '0');
+      const añoInicial = fechaInicial.getUTCFullYear();
+      form['startDate'] = `${diaInicial}-${mesInicial}-${añoInicial}`;
     }
     if(end.value != null){
-      form['endDate'] = end.value;
+      const fechaFinal = new Date(end.value);
+      const diaFinal = fechaFinal.getUTCDate().toString().padStart(2, '0');
+      const mesFinal = (fechaFinal.getUTCMonth() + 1).toString().padStart(2, '0');
+      const añoFinal = fechaFinal.getUTCFullYear();
+      form['endDate'] = `${diaFinal}-${mesFinal}-${añoFinal}`;
     }
+    console.log('form', form);
     await myInvoicesStore.getInvoices(form);
     isLoading.value = false;
   }catch (e) {
@@ -76,11 +85,20 @@ const getMoreInvoices = async () => {
       //'startDate': '13-04-2023'
     };
     if(start.value != null){
-      form['startDate'] = start.value;
+      const fechaInicial = new Date(start.value);
+      const diaInicial = fechaInicial.getUTCDate().toString().padStart(2, '0');
+      const mesInicial = (fechaInicial.getUTCMonth() + 1).toString().padStart(2, '0');
+      const añoInicial = fechaInicial.getUTCFullYear();
+      form['startDate'] = `${diaInicial}-${mesInicial}-${añoInicial}`;
     }
     if(end.value != null){
-      form['endDate'] = end.value;
+      const fechaFinal = new Date(end.value);
+      const diaFinal = fechaFinal.getUTCDate().toString().padStart(2, '0');
+      const mesFinal = (fechaFinal.getUTCMonth() + 1).toString().padStart(2, '0');
+      const añoFinal = fechaFinal.getUTCFullYear();
+      form['endDate'] = `${diaFinal}-${mesFinal}-${añoFinal}`;
     }
+    console.log('form', form);
     await myInvoicesStore.getMoreInvoices(form);
     isLoadingMore.value = false;
   } catch (e) {

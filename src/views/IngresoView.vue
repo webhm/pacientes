@@ -50,9 +50,9 @@ const firstSelectedQuestionValid = computed(() => selectedQuestions.value[0] !==
 const secondSelectedQuestionValid = computed(() => selectedQuestions.value[1] !== null && selectedAnswers.value[1] !== null);
 const areDiferentValid = computed(() => selectedQuestions.value[0] !== selectedQuestions.value[1]);
 const questions = ref({});
-const userQuestions = ref([]);
+const userQuestions = ref({});
 const lostPassDirty = ref(false);
-const questionAnswer = ref([null, null]);
+const questionAnswer = ref({});
 //livejournalsucks
 const goToSecondStepRegister = (e) => {
   e.preventDefault();
@@ -213,10 +213,23 @@ const getFullQuestions = async () => {
     console.log('e', e);
   }
 }
+
+const checkIsValid = () => {
+
+  const keys = Object.keys(userQuestions.value);
+  console.log('keys chek', keys);
+  return !keys.some((key) => {
+    return (
+        questionAnswer.value[key] === null ||
+        questionAnswer.value[key] === undefined ||
+        questionAnswer.value[key] === ''
+    );
+  });
+}
 const resetPassword = async (event) => {
   try {
     event.preventDefault();
-    if (questionAnswer.value[0] === null || questionAnswer.value[1] === null) {
+    if (!checkIsValid()) {
       lostPassDirty.value = true;
       return;
     }
@@ -225,8 +238,12 @@ const resetPassword = async (event) => {
     const form = {
       DNI: loginForm.value.DNI,
     };
-    form[userQuestions.value[0]] = questionAnswer.value[0];
-    form[userQuestions.value[1]] = questionAnswer.value[1];
+    const keys = Object.keys(userQuestions.value);
+    keys.forEach((key) => {
+      form[key] = questionAnswer.value[key];
+    });
+
+    console.log('form', form);
     const resetResponse = await patientAuthLostPassChange(form);
 
     if (resetResponse.status) {
@@ -274,6 +291,7 @@ const getUserQuestions = async () => {
     console.log('userQuestionsResponse', userQuestionsResponse);
     if (userQuestionsResponse.status) {
       userQuestions.value = userQuestionsResponse.data;
+
     } else {
       switch (userQuestionsResponse.errorCode) {
 
@@ -555,6 +573,7 @@ onMounted(async () => {
                            style="border-radius: 50px"
                            required
                            name="user"
+                           @input="valid=false;"
                            :disabled="location === 'loading'"
                            :placeholder="language === 'es' ? 'Ingresa tu cédula o pasaporte' : 'Enter your user'">
                   </div>
@@ -899,7 +918,7 @@ onMounted(async () => {
               <div class="form-group my-2 " v-for="(question, key) in userQuestions" v-bind:key="key">
                 <div class="row no-gutters no-margin">
                   <div class="col-12 col-md-7 col-lg-6 my-1">
-                    <label><b>{{ questions[question] }}</b></label>
+                    <label><b>{{ questions[key] }}</b></label>
                     <input type="text"
                            v-model="questionAnswer[key]"
                            class="m-0 p-0 pl-3 form-control"
@@ -907,19 +926,16 @@ onMounted(async () => {
                            name="questionAnswer"
                            :disabled="location === 'loading'"
                            placeholder="Responde tu pregunta de seguridad">
+
+                    <p class="text-right text-error my-0" v-if="lostPassDirty && (questionAnswer[key] === null || questionAnswer[key] === undefined || questionAnswer[key] === '')">
+                      Responde esta la pregunta
+                    </p>
                   </div>
                   <div class="col-3 col-lg-2">
                   </div>
                 </div>
               </div>
-              <div class="row my-1 ml-2"
-                   v-if="(questionAnswer[0] === null || questionAnswer[1] === null) && lostPassDirty">
-                <div class="col-12 col-md-6 col-lg-6">
-                  <p class="text-right text-error">
-                    Responde todas las preguntas
-                  </p>
-                </div>
-              </div>
+
               <div class="row my-1 ml-2">
                 <div class="col-12 col-md-8 col-lg-8">
                   <p class="text-right mb-0">
@@ -937,7 +953,7 @@ onMounted(async () => {
                 <div class="row no-gutters no-margin">
                   <div class="col-12 col-md-7 col-lg-7 mt-2">
                     <button class="text-center cursor-pointer pt-2"
-                            :class="[questionAnswer[0] !== null && questionAnswer[1] !== null ? 'btn-loginv3' : 'left-button']"
+                            :class="[checkIsValid() ? 'btn-loginv3' : 'left-button']"
                             @click="resetPassword($event)">
                       {{ language === 'es' ? 'Resetear' : 'Reset' }}
                     </button>
