@@ -163,10 +163,10 @@ const getLabResults = async () => {
     isLoadingLab.value = false;
   } catch (e) {
     isLoadingLab.value = false;
-    console.log('error', e);
-    console.log('error statusCode', e.statusCode);
-    console.log('error message', e.message);
-    console.log('error errorCode', e.errorCode);
+    console.log('error', e.Error);
+    console.log('error statusCode', e.Error?.statusCode);
+    console.log('error message', e.Error?.message);
+    console.log('error errorCode', e.Error?.errorCode);
     if(e.message === 'Unauthorized' || e.message === 'Expired token'){
       await authStore.logout();
       await router.replace({ name: "ingreso" });
