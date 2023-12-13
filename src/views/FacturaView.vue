@@ -41,7 +41,7 @@ const getUrl = async () => {
     let response = await getInvoiceDoc(type.value, id.value);
     console.log("response", response);
     if (response.status) {
-      src.value = response.url;
+      src.value = response.data._PDF;
       isAvailable.value = true;
     } else {
       isAvailable.value = false;

@@ -66,10 +66,12 @@ const getInvoices = async () => {
   }catch (e) {
     isLoading.value = false;
     console.log('error', e.message );
-    if(e.message === 'Unauthorized'){
-      await authStore.logout();
-      await router.replace({ name: "ingreso" });
-    }
+    // if(e.message === 'Unauthorized'){
+    //   await authStore.logout();
+    //   await router.replace({ name: "ingreso" });
+    // }
+    await authStore.logout();
+    await router.replace({ name: "ingreso" });
   }
 };
 const getMoreInvoices = async () => {
@@ -104,15 +106,17 @@ const getMoreInvoices = async () => {
   } catch (e) {
     isLoadingMore.value = false;
     console.log('error', e);
-    if(e.message === 'Unauthorized'){
-      await authStore.logout();
-      await router.replace({ name: "ingreso" });
-    }
+    // if(e.message === 'Unauthorized'){
+    //   await authStore.logout();
+    //   await router.replace({ name: "ingreso" });
+    // }
+    await authStore.logout();
+    await router.replace({ name: "ingreso" });
   }
 };
 
-const downloadInvoice = (invoice) => {
-  if (invoice.FACT) {
+const downloadInvoicePDF = (invoice) => {
+  if (invoice.FACT && invoice.TIPO) {
     notify({
       title: "Listo",
       text: "Se procederá con la descarga en unos segundos",
@@ -121,15 +125,85 @@ const downloadInvoice = (invoice) => {
     getInvoiceDoc(invoice.TIPO, invoice.FACT).then(async (response) => {
       console.log('res', response);
       if (response.status) {
-        const link = document.createElement("a");
-        link.setAttribute("href", response.url);
-        link.setAttribute("target", "_blank");
+        const pdfBinary = atob(response.data._PDF);
+
+        // Convierte los datos binarios a un array de bytes
+        const pdfBytes = new Uint8Array(pdfBinary.length);
+        for (let i = 0; i < pdfBinary.length; i++) {
+          pdfBytes[i] = pdfBinary.charCodeAt(i);
+        }
+        const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+        // Crea un objeto URL para el archivo PDF
+        const pdfUrl = URL.createObjectURL(pdfBlob);
+        const pdfLink = document.createElement('a');
+        pdfLink.target = '_blank';
+        pdfLink.href = pdfUrl;
         const d = new Date();
-        link.setAttribute("download", `${invoice.FACT}_${d.getTime()}.pdf`);
-        link.style.display = "none";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        pdfLink.download = `${invoice.FACT}_${d.getTime()}.pdf`;
+        pdfLink.click();
+        URL.revokeObjectURL(pdfUrl);
+        console.log('Archivos descargados exitosamente.');
+
+
+        // const link = document.createElement("a");
+        // link.setAttribute("href", response._PDF);
+        // link.setAttribute("target", "_blank");
+        // const d = new Date();
+        // link.setAttribute("download", `${invoice.FACT}_${d.getTime()}.pdf`);
+        // link.style.display = "none";
+        // document.body.appendChild(link);
+        // link.click();
+        // document.body.removeChild(link);
+        notify({
+          title: "Listo",
+          text: "Factura descargada",
+          type: "success"
+        });
+      } else {
+        notify({
+          title: "El archivo no esta disponible",
+          text: response.message,
+          type: "error"
+        });
+      }
+    });
+  }
+};
+const downloadInvoiceXML = (invoice) => {
+  if (invoice.FACT && invoice.TIPO) {
+    notify({
+      title: "Listo",
+      text: "Se procederá con la descarga en unos segundos",
+      type: "info"
+    });
+    getInvoiceDoc(invoice.TIPO, invoice.FACT).then(async (response) => {
+      console.log('res', response);
+      if (response.status) {
+        const xmlBinary = atob(response.data._XML);
+        const xmlBytes = new Uint8Array(xmlBinary.length);
+        for (let i = 0; i < xmlBinary.length; i++) {
+          xmlBytes[i] = xmlBinary.charCodeAt(i);
+        }
+        const xmlBlob = new Blob([xmlBytes], { type: 'application/xml' });
+        const xmlUrl = URL.createObjectURL(xmlBlob);
+        const xmlLink = document.createElement('a');
+        xmlLink.target = '_blank';
+        xmlLink.href = xmlUrl;
+        const d = new Date();
+        xmlLink.download = `${invoice.FACT}_${d.getTime()}.xml`;
+        xmlLink.click();
+        URL.revokeObjectURL(xmlUrl);
+        console.log('Archivos descargados exitosamente.');
+
+        // const link = document.createElement("a");
+        // link.setAttribute("href", response._PDF);
+        // link.setAttribute("target", "_blank");
+        // const d = new Date();
+        // link.setAttribute("download", `${invoice.FACT}_${d.getTime()}.pdf`);
+        // link.style.display = "none";
+        // document.body.appendChild(link);
+        // link.click();
+        // document.body.removeChild(link);
         notify({
           title: "Listo",
           text: "Factura descargada",
@@ -283,20 +357,28 @@ onMounted(async () => {
                     <p class="text-results"><b>Factura Total:</b> $ {{ invoice?.TOTAL }}</p>
                   </div>
                   <div class="col-3 d-flex justify-content-center">
-                    <div class="cursor-pointer" title="Ver factura"
-                         style="display: inline-block;"
-                         @click.exact="goToInvoice(invoice)"
-                         @click.ctrl="goToInvoiceCtrl(invoice)">
-                      <div class="p-2 p-md-4">
-                        <font-awesome-icon :icon="['fas', 'eye']" size="2x"
-                                           class="icon-device"/>
+<!--                    <div class="cursor-pointer" title="Ver factura"-->
+<!--                         style="display: inline-block;"-->
+<!--                         @click.exact="goToInvoice(invoice)"-->
+<!--                         @click.ctrl="goToInvoiceCtrl(invoice)">-->
+<!--                      <div class="p-2 p-md-4">-->
+<!--                        <font-awesome-icon :icon="['fas', 'eye']" size="2x"-->
+<!--                                           class="icon-device"/>-->
+<!--                      </div>-->
+<!--                    </div>-->
+                    <div @click="downloadInvoicePDF(invoice)"
+                      class="cursor-pointer"
+                      :title="`Descargar factura PDF`">
+                      <div class="p-0 p-md-4 py-md-6">
+                        <font-awesome-icon :icon="['fas', 'file-pdf']" size="2x"
+                                           class="icon-device" />
                       </div>
                     </div>
-                    <div @click="downloadInvoice(invoice)"
+                    <div @click="downloadInvoiceXML(invoice)"
                       class="cursor-pointer"
-                      :title="`Descargar factura`">
+                      :title="`Descargar factura xml`">
                       <div class="p-0 p-md-4 py-md-6">
-                        <font-awesome-icon :icon="['fas', 'download']" size="2x"
+                        <font-awesome-icon :icon="['fas', 'file']" size="2x"
                                            class="icon-device" />
                       </div>
                     </div>
