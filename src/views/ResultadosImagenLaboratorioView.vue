@@ -164,6 +164,7 @@ const getLabResults = async () => {
   } catch (e) {
     isLoadingLab.value = false;
     console.log('error', e);
+    console.log('error statusCode', e.statusCode);
     console.log('error message', e.message);
     console.log('error errorCode', e.errorCode);
     if(e.message === 'Unauthorized' || e.message === 'Expired token'){
@@ -201,6 +202,7 @@ const getMoreLabResults = async () => {
   } catch (e) {
     isLoadingMoreLab.value = false;
     console.log('error', e);
+    console.log('error statusCode', e.statusCode);
     console.log('error message', e.message);
     console.log('error errorCode', e.errorCode);
     if(e.message === 'Unauthorized' || e.message === 'Expired token'){
@@ -248,6 +250,7 @@ const getImageResults = async () => {
   } catch (e) {
     isLoadingImage.value = false;
     console.log('error', e);
+    console.log('error statusCode', e.statusCode);
     console.log('error message', e.message);
     console.log('error errorCode', e.errorCode);
     if(e.message === 'Unauthorized' || e.message === 'Expired token'){
@@ -285,6 +288,7 @@ const getMoreImageResults = async () => {
   } catch (e) {
     isLoadingMoreImage.value = false;
     console.log('error', e);
+    console.log('error message', e.statusCode);
     console.log('error message', e.message);
     console.log('error errorCode', e.errorCode);
     if(e.message === 'Unauthorized' || e.message === 'Expired token'){
