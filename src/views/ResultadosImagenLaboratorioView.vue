@@ -273,13 +273,15 @@ const getMoreImageResults = async () => {
 
 
 const downloadImageFile = (imageResult) => {
-  if (imageResult.URL_INFORME) {
+  console.log('imageResult', imageResult);
+  if (imageResult.LINK_DESCARGA) {
+    let split = imageResult.LINK_DESCARGA.split("/");
     notify({
       title: "Listo",
       text: "Se procederá con la descarga en unos segundos",
       type: "info"
     });
-    urlDocumento('https:' + imageResult.URL_INFORME).then(async (response) => {
+    urlDocumento(`https://api.hospitalmetropolitano.org/v2/pacientes/resultado/i/?id=${split[5]}`).then(async (response) => {
       if (response.status) {
         const link = document.createElement("a");
         link.setAttribute("href", response.url);
@@ -307,13 +309,15 @@ const downloadImageFile = (imageResult) => {
 };
 
 const downloadLabFile = (labResult) => {
-  if (labResult.URL_INFORME) {
+  console.log('labResult', labResult);
+  if (labResult.LINK_VER) {
+    let split = labResult.LINK_VER.split("/");
     notify({
       title: "Listo",
       text: "Se procederá con la descarga en unos segundos",
       type: "info"
     });
-    urlDocumento('https:' + labResult.URL_INFORME).then(async (response) => {
+    urlDocumento(`https://api.hospitalmetropolitano.org/v2/pacientes/resultado/l/?id=${split[5]}`).then(async (response) => {
       if (response.status) {
         const link = document.createElement("a");
         link.setAttribute("href", response.url);

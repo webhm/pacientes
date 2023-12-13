@@ -951,13 +951,13 @@ onMounted(async () => {
           </form>
           <!--columna de iframe-->
           <div class="col-12 col-md-5 mb-md-4">
-            <div class="px-2 mt-5 pt-8">
-              <iframe width="100%" height="300" src="https://www.youtube.com/embed/t0zKd0QUxyY?controls=0"
-                      title="MetroVirtual" frameborder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowfullscreen></iframe>
-              <p style="text-align: center;">¿Qué es MetroVirtual pacientes?</p>
-            </div>
+<!--            <div class="px-2 mt-5 pt-8">-->
+<!--              <iframe width="100%" height="300" src="https://www.youtube.com/embed/t0zKd0QUxyY?controls=0"-->
+<!--                      title="MetroVirtual" frameborder="0"-->
+<!--                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"-->
+<!--                      allowfullscreen></iframe>-->
+<!--              <p style="text-align: center;">¿Qué es MetroVirtual pacientes?</p>-->
+<!--            </div>-->
           </div>
         </div>
       </div>
