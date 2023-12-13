@@ -164,9 +164,16 @@ const getLabResults = async () => {
   } catch (e) {
     isLoadingLab.value = false;
     console.log('error', e);
-    if(e.message === 'Unauthorized'){
+    console.log('error message', e.message);
+    console.log('error errorCode', e.errorCode);
+    if(e.message === 'Unauthorized' || e.message === 'Expired token'){
       await authStore.logout();
       await router.replace({ name: "ingreso" });
+      return;
+    }
+    if (e.errorCode === 4031) {
+      await authStore.logout();
+      await router.replace({name: "ingreso"});
     }
   }
 };
@@ -194,9 +201,16 @@ const getMoreLabResults = async () => {
   } catch (e) {
     isLoadingMoreLab.value = false;
     console.log('error', e);
-    if(e.message === 'Unauthorized'){
+    console.log('error message', e.message);
+    console.log('error errorCode', e.errorCode);
+    if(e.message === 'Unauthorized' || e.message === 'Expired token'){
       await authStore.logout();
       await router.replace({ name: "ingreso" });
+      return;
+    }
+    if (e.errorCode === 4031) {
+      await authStore.logout();
+      await router.replace({name: "ingreso"});
     }
   }
 };
@@ -234,9 +248,16 @@ const getImageResults = async () => {
   } catch (e) {
     isLoadingImage.value = false;
     console.log('error', e);
-    if(e.message === 'Unauthorized'){
+    console.log('error message', e.message);
+    console.log('error errorCode', e.errorCode);
+    if(e.message === 'Unauthorized' || e.message === 'Expired token'){
       await authStore.logout();
       await router.replace({ name: "ingreso" });
+      return;
+    }
+    if (e.errorCode === 4031) {
+      await authStore.logout();
+      await router.replace({name: "ingreso"});
     }
   }
 };
@@ -264,7 +285,14 @@ const getMoreImageResults = async () => {
   } catch (e) {
     isLoadingMoreImage.value = false;
     console.log('error', e);
-    if(e.message === 'Unauthorized'){
+    console.log('error message', e.message);
+    console.log('error errorCode', e.errorCode);
+    if(e.message === 'Unauthorized' || e.message === 'Expired token'){
+      await authStore.logout();
+      await router.replace({ name: "ingreso" });
+      return;
+    }
+    if(e.errorCode === 4031){
       await authStore.logout();
       await router.replace({ name: "ingreso" });
     }
