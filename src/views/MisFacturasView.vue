@@ -376,7 +376,7 @@ onMounted(async () => {
                     </div>
                     <div @click="downloadInvoiceXML(invoice)"
                       class="cursor-pointer"
-                      :title="`Descargar factura xml`">
+                      :title="`Descargar factura XML`">
                       <div class="p-0 p-md-4 py-md-6">
                         <font-awesome-icon :icon="['fas', 'file']" size="2x"
                                            class="icon-device" />
