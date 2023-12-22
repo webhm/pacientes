@@ -147,7 +147,7 @@ const goTo = async (name) => {
         <!--columna de text-->
         <div class=" col-12 col-md-4">
           <div class="row mt-2 mt-md-5 justify-content-center">
-            <a href="https://www.hospitalmetropolitano.org/es/terminos-condiciones-y-uso-de-medios" target="_blank">
+            <a href="https://www.hospitalmetropolitano.org/es/terminos-y-condiciones-metrovirtual" target="_blank">
               <h5 class="title-terminos">
                 Términos y Condiciones
               </h5>
@@ -156,7 +156,7 @@ const goTo = async (name) => {
         </div>
         <div class=" col-12 col-md-4">
           <div class="row mt-2 mt-md-5 justify-content-center">
-            <a href="https://www.hospitalmetropolitano.org/es/politicas-de-privacidad" target="_blank">
+            <a href="https://www.hospitalmetropolitano.org/es/politica-de-privacidad-metrovirtual" target="_blank">
               <h5 class="title-terminos">
                 Políticas de Privacidad
               </h5>
