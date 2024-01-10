@@ -3,13 +3,15 @@ import FooterMedico from "../components/FooterMedico.vue";
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import IframeViewer from "../components/IframeViewer.vue";
+import {decryptId} from "../services/security";
 
 const route = useRoute();
 const router = useRouter();
 
 const isLoading = ref(false);
 const props = defineProps(["id"]);
-const exam_id = ref(props.id);
+const encrypted_exam_id = ref(props.id);
+const exam_id = ref(decryptId(encrypted_exam_id.value));
 const title = ref("Zero FootPrint GE - Metrovirtual - Hospital Metropolitano");
 
 onMounted(() => {});

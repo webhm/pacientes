@@ -89,7 +89,7 @@ const router = createRouter({
     },
     // patient zerofootprint view / medic
     {
-      path: "/zerofootprint/:nhc",
+      path: "/zerofootprint",
       name: "zerofootprint-view",
       component: ZeroView,
       props: true,
@@ -139,7 +139,7 @@ const router = createRouter({
     },
     // // patient lab result / medic
     {
-      path: language === "es" ? "/:nhc/laboratorio/:url" : "/:nhc/lab/:url",
+      path: language === "es" ? "/laboratorio/:url" : "/lab/:url",
       name: "lab-result-view",
       component: LabResultView,
       props: true,
@@ -149,7 +149,7 @@ const router = createRouter({
     },
     // // patient image result / medic
     {
-      path: language === "es" ? "/:nhc/imagen/:url" : "/:nhc/image/:url",
+      path: language === "es" ? "/imagen/:url" : "/image/:url",
       name: "image-result-view",
       component: ImageResultView,
       props: true,

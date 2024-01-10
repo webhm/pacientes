@@ -10,6 +10,7 @@ import {usePatientsListStore} from "../stores/patientsList";
 import {useMyLabResultsStore} from "../stores/myLabResults";
 import {useMyImageResultsStore} from "../stores/myImageResults";
 import {notify} from "@kyvg/vue3-notification";
+import { encryptId } from "../services/security";
 
 const patientsListStore = usePatientsListStore();
 const authStore = useAuthStore();
@@ -66,16 +67,17 @@ const goToLabResult = async (result) => {
   //   query: { prev: "resultados" }
   // });
   // window.open(url.href, "_blank");
+
   await router.push({
     name: "lab-result-view",
-    params: {url: split[5], nhc: user.value.NHC},
+    params: {url: split[5]},
   });
 };
 const goToLabResultCtrl = async (result) => {
   let split = result.LINK_VER.split("/");
   let url = router.resolve({
     name: "lab-result-view",
-    params: {url: split[5], nhc: user.value.NHC},
+    params: {url: split[5]},
   });
   window.open(url.href, "_blank");
   // await router.push({name: 'medic-lab-result-view', params: {url: split[3], nhc: user.value.NHC}});
@@ -90,21 +92,20 @@ const goToZero = async () => {
   // window.open(url.href, "_blank");
   await router.push({
     name: "zerofootprint-view",
-    params: {nhc: user.value.NHC},
   });
 };
 const goToZeroCtrl = async () => {
   let url = router.resolve({
     name: "zerofootprint-view",
-    params: {nhc: user.value.NHC},
   });
   window.open(url.href, "_blank");
   //await router.push({name: 'medic-patient-curva-view', params: {type, na, nhc: user.value.NHC}});
 };
 const goToZeroCtrlItem = async (item) => {
+  let encryptedKey = encryptId(item.PROCEDURE_KEY);
   let url = router.resolve({
     name: "zerofootprint-item-view",
-    params: {id: item.PROCEDURE_KEY},
+    params: {id: encryptedKey},
   });
   window.open(url.href, "_blank");
   //await router.push({name: 'medic-patient-curva-view', params: {type, na, nhc: user.value.NHC}});
@@ -121,14 +122,14 @@ const goToImageResult = async (result) => {
   // window.open(url.href, "_blank");
   await router.push({
     name: "image-result-view",
-    params: {url: split[5], nhc: user.value.NHC}
+    params: {url: split[5]}
   });
 };
 const goToImageResultCtrl = async (result) => {
   let split = result.LINK_DESCARGA.split("/");
   let url = router.resolve({
     name: "image-result-view",
-    params: {url: split[5], nhc: user.value.NHC}
+    params: {url: split[5]}
   });
   window.open(url.href, "_blank");
   // await router.push({
@@ -389,28 +390,28 @@ const getNextItems = () => {
     // console.log('document.documentElement.offsetHeight', document.documentElement.offsetHeight);
     // console.log('document.documentElement.scrollTop + window.innerHeight', document.documentElement.scrollTop + window.innerHeight);
     let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight;
-    console.log('bottomOfWindow', bottomOfWindow);
+    // console.log('bottomOfWindow', bottomOfWindow);
     if (bottomOfWindow) {
-      console.log('is bottom');
+      // console.log('is bottom');
       if (patientsListStore.activeTab === 0) {
-        console.log('limit_lab.value', limit_lab.value);
-        console.log('offset_lab.value', offset_lab.value);
+        // console.log('limit_lab.value', limit_lab.value);
+        // console.log('offset_lab.value', offset_lab.value);
         if (total_lab.value > limit_lab.value) {
-          console.log('hay mas datos lab traerlos, sumarle al offset el limit');
+          // console.log('hay mas datos lab traerlos, sumarle al offset el limit');
           myLabResultsStore.offset += limit_lab.value;
           getMoreLabResults();
         } else {
-          console.log('no hay mas datos lab no hacer nada');
+          // console.log('no hay mas datos lab no hacer nada');
         }
       } else {
-        console.log('limit_image.value', limit_image.value);
-        console.log('offset_image.value', offset_image.value);
+        // console.log('limit_image.value', limit_image.value);
+        // console.log('offset_image.value', offset_image.value);
         if (total_image.value > limit_image.value) {
-          console.log('hay mas datos image traerlos, sumarle al offset el limit');
+          // console.log('hay mas datos image traerlos, sumarle al offset el limit');
           myImageResultsStore.offset += limit_image.value;
           getMoreImageResults();
         } else {
-          console.log('no hay mas datos omage no hacer nada');
+          // console.log('no hay mas datos omage no hacer nada');
         }
       }
 

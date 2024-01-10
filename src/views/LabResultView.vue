@@ -3,6 +3,7 @@ import FooterMedico from "../components/FooterMedico.vue";
 import { ref, computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { urlDocumento } from "../services/patient";
+import { decryptId } from "../services/security";
 import PdfViewer from "../components/PdfViewer.vue";
 import { useNotification } from "@kyvg/vue3-notification";
 import {useAuthStore} from "../stores/auth";
@@ -17,7 +18,8 @@ const isAvailable = ref(false);
 const props = defineProps(["nhc", "url"]);
 const src = ref(null);
 const statusPaciente = ref(null);
-const nhc = ref(props.nhc);
+// const encryptedNhc = ref(props.nhc);
+const nhc = ref(user.value.NHC);
 const url = ref(props.url);
 const title = ref("Resultado de Laboratorio - Metrovirtual - Hospital Metropolitano");
 
@@ -119,7 +121,7 @@ const getUrl = async (url) => {
             <template v-else>
               <template v-if="isAvailable">
                 <pdf-viewer :url="src" :nhc="nhc" :name="'resultado_laboratorio'" :id="url"
-                            :type="'laboratorio'" />
+                            :type="'laboratorio'" :share="false"/>
               </template>
               <template v-else>
                 <div class=" my-3 py-3  text-center">

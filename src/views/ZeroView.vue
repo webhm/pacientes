@@ -3,15 +3,20 @@ import FooterMedico from "../components/FooterMedico.vue";
 import { ref, onMounted, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import IframeViewer from "../components/IframeViewer.vue";
+import {useAuthStore} from "../stores/auth";
+import {encryptId} from "../services/security";
 
+const authStore = useAuthStore();
+const user = computed(() => authStore.user);
 const route = useRoute();
 const router = useRouter();
 
 const isLoading = ref(false);
 const props = defineProps(["nhc"]);
-const nhc = ref(props.nhc);
+const nhc = ref(user.value.NHC);
+const encryptedNHC = ref(encryptId(nhc.value));
 const title = ref("Zero FootPrint GE - Metrovirtual - Hospital Metropolitano");
-const shareLink = computed(() => `https://medicos2.hospitalmetropolitano.org/compartir/zerofootprint/${nhc.value}`);
+const shareLink = computed(() => `${window.location.origin}/compartir/zerofootprint/${encryptedNHC.value}`);
 onMounted(() => {});
 const goBack = () => {
   window.close();

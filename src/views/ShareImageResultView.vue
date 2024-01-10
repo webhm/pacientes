@@ -3,13 +3,15 @@ import { ref, onMounted } from "vue";
 import { urlDocumento } from "../services/patient";
 import PdfViewer from "../components/PdfViewer.vue";
 import { useNotification } from "@kyvg/vue3-notification";
+import {decryptId} from "../services/security";
 const { notify } = useNotification();
 
 const isLoading = ref(false);
 const isAvailable = ref(false);
 const props = defineProps(["url", "nhc"]);
 const src = ref(null);
-const nhc = ref(props.nhc);
+const encryptedNHC = ref(props.nhc);
+const nhc = ref(decryptId(encryptedNHC.value));
 const url = ref(props.url);
 const title = ref("Resultado de Imagen - Metrovirtual - Hospital Metropolitano");
 const statusPaciente = ref(null);
@@ -88,7 +90,7 @@ const getUrl = (url) => {
             <template v-else>
               <template v-if="isAvailable">
                 <pdf-viewer :url="src" :nhc="nhc" :name="'resultado_imagen'" :type="'imagen'"
-                            :id="url" />
+                            :id="url" :share="true"/>
               </template>
               <template v-else>
                 <p>Resultado no disponible</p>

@@ -1,13 +1,15 @@
 <script setup>
 import FooterMedico from "../components/FooterMedico.vue";
-import { ref, onMounted } from "vue";
+import {ref, onMounted, computed} from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { urlDocumento } from "../services/patient";
 import PdfViewer from "../components/PdfViewer.vue";
 import { useNotification } from "@kyvg/vue3-notification";
+import {useAuthStore} from "../stores/auth";
+import {decryptId} from "../services/security";
 
-// const authStore = useAuthStore();
-// const user = computed(() => authStore.user);
+const authStore = useAuthStore();
+const user = computed(() => authStore.user);
 // const type = computed(() => authStore.type);
 
 const route = useRoute();
@@ -19,7 +21,7 @@ const isAvailable = ref(false);
 const props = defineProps(["url", "nhc"]);
 const src = ref(null);
 const statusPaciente = ref(null);
-const nhc = ref(props.nhc);
+const nhc = ref(user.value.NHC);
 const url = ref(props.url);
 onMounted(() => {
   getUrl(url.value);
@@ -127,7 +129,7 @@ const getUrl = async (url) => {
             <template v-else>
               <template v-if="isAvailable">
                 <pdf-viewer :url="src" :nhc="nhc" :name="'resultado_imagen'" :type="'imagen'"
-                            :id="url" />
+                            :id="url" :share="false"/>
               </template>
               <template v-else>
                 <div class=" my-3 py-3  text-center">

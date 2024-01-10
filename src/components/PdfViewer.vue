@@ -2,18 +2,21 @@
 import { computed, onMounted, ref } from "vue";
 import pdf from "@jbtje/vite-vue3pdf";
 import printJS from "print-js";
+import { encryptId } from "../services/security";
 
 import { useNotification } from "@kyvg/vue3-notification";
 
 const { notify } = useNotification();
 const pdfRef = ref(null);
 
-const props = defineProps(["url", "name", "type", "nhc", "id"]);
+const props = defineProps(["url", "name", "type", "nhc", "id", "share"]);
 const src = ref(props.url);
 const id = ref(props.id);
+const share = ref(props.share);
 const name = ref(props.name);
 const pageType = ref(props.type);
 const nhc = ref(props.nhc);
+const encryptedNHC = ref(encryptId(nhc.value));
 
 const currentPage = ref(1);
 const numPages = ref(1);
@@ -34,7 +37,7 @@ const nextPage = () => {
   currentPage.value = currentPage.value + 1;
 };
 
-const shareLink = computed(() => `https://medicos2.hospitalmetropolitano.org/compartir/${nhc.value}/${pageType.value}/${id.value}`);
+const shareLink = computed(() => `${window.location.origin}/compartir/${encryptedNHC.value}/${pageType.value}/${id.value}`);
 const subject = ref('');
 const stringVal = ref('');
 const downloadPdf = () => {
@@ -111,7 +114,7 @@ onMounted(async () => {
     </div>
     <div class="container">
       <div class="row justify-content-end my-1 row-img">
-        <div class="col-2 col-md-1 col-img">
+        <div class="col-2 col-md-1 col-img" v-if="!share">
           <a class="icon-img cursor-pointer" title="Compartir por whatsapp" target="_blank"
              :href="`https://api.whatsapp.com/send?text=Te%20comparto%20mi%20${stringVal}%20en%20el%20siguiente%20enlace:%20${shareLink}`">
             <div class="row img-borderv4">
@@ -121,7 +124,7 @@ onMounted(async () => {
             </div>
           </a>
         </div>
-        <div class="col-2 col-md-1 col-img">
+        <div class="col-2 col-md-1 col-img" v-if="!share">
 
           <a class="icon-img cursor-pointer" title="Compartir por email" target="_blank"
              :href="`mailto:an@email.com?subject=${subject}&body=Te%20comparto%20mi%20${stringVal}%20en%20el%20siguiente%20enlace:%20${shareLink}`">

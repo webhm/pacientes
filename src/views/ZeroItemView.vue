@@ -3,15 +3,19 @@ import FooterMedico from "../components/FooterMedico.vue";
 import { ref, onMounted, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import IframeViewer from "../components/IframeViewer.vue";
+import {decryptId} from "../services/security";
 
 const route = useRoute();
 const router = useRouter();
 
 const isLoading = ref(false);
 const props = defineProps(["id"]);
-const exam_id = ref(props.id);
+const encrypted_exam_id = ref(props.id);
+console.log('encrypted_exam_id', encrypted_exam_id.value);
+const exam_id = ref(decryptId(encrypted_exam_id.value));
+console.log('ex', exam_id);
 const title = ref("Zero FootPrint GE - Metrovirtual - Hospital Metropolitano");
-const shareLink = computed(() => `https://medicos2.hospitalmetropolitano.org/compartir/zerofootprint-item/${exam_id.value}`);
+const shareLink = computed(() => `${window.location.origin}/compartir/zerofootprint-item/${encrypted_exam_id.value}`);
 onMounted(() => {});
 
 const goBack = () => {
@@ -83,7 +87,7 @@ const goBack = () => {
           </div>
         </template>
         <template v-else>
-          <iframe-viewer :key="nhc"
+          <iframe-viewer
                          :url="`https://imagen.hmetro.med.ec/zfp?Lights=on&mode=proxy#view&ris_exam_id=${exam_id}&un=WEBAPI&pw=lEcfvZxzlXTsfimMMonmVZZ15IqsgEcdV%2forI8EUrLY%3d`" />
         </template>
       </div>
