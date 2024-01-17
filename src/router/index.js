@@ -8,12 +8,16 @@ import DashboardView from "../views/DashboardView.vue";
 import ResultadosImagenLaboratorioView from "../views/ResultadosImagenLaboratorioView.vue";
 import LabResultView from "../views/LabResultView.vue";
 import ShareLabResultView from "../views/ShareLabResultView.vue";
+import V2ShareLabResultView from "../views/V2ShareLabResultView.vue";
 import ImageResultView from "../views/ImageResultView.vue";
 import ShareImageResultView from "../views/ShareImageResultView.vue";
+import V2ShareImageResultView from "../views/V2ShareImageResultView.vue";
 import ZeroView from "../views/ZeroView.vue";
 import ShareZeroView from "../views/ShareZeroView.vue";
+import V2ShareZeroView from "../views/V2ShareZeroView.vue";
 import ZeroItemView from "../views/ZeroItemView.vue";
 import ShareZeroItemView from "../views/ShareZeroItemView.vue";
+import V2ShareZeroItemView from "../views/V2ShareZeroItemView.vue";
 import BuzonDeSugerenciasView from "../views/BuzonDeSugerenciasView.vue";
 import MiPerfilView from "../views/MiPerfilView.vue";
 import MisPacientesView from "../views/RutaDelPaciente.vue";
@@ -107,6 +111,16 @@ const router = createRouter({
         authRequired: false,
       }
     },
+    // share patient zerofootprint view / medic
+    {
+      path: "/compartir-v2/zerofootprint/:nhc",
+      name: "v2-share-zerofootprint-view",
+      component: V2ShareZeroView,
+      props: true,
+      meta: {
+        authRequired: false,
+      }
+    },
     // // patient zerofootprint view / medic
     {
       path: "/zerofootprint-item/:id",
@@ -122,6 +136,16 @@ const router = createRouter({
       path: "/compartir/zerofootprint-item/:id",
       name: "share-zerofootprint-item-view",
       component: ShareZeroItemView,
+      props: true,
+      meta: {
+        authRequired: false,
+      }
+    },
+    // share patient zerofootprint view / medic
+    {
+      path: "/compartir-v2/zerofootprint-item/:id",
+      name: "v2-share-zerofootprint-item-view",
+      component: V2ShareZeroItemView,
       props: true,
       meta: {
         authRequired: false,
@@ -172,6 +196,26 @@ const router = createRouter({
       path: language === "es" ? "/compartir/:nhc/imagen/:url" : "/share/:nhc/image/:url",
       name: "share-image-result-view",
       component: ShareImageResultView,
+      props: true,
+      meta: {
+        authRequired: false,
+      }
+    },
+    // // share lab result / medic
+    {
+      path: language === "es" ? "/compartir-v2/:nhc/laboratorio/:url" : "/share/:nhc/lab/:url",
+      name: "v2-share-lab-result-view",
+      component: V2ShareLabResultView,
+      props: true,
+      meta: {
+        authRequired: false,
+      }
+    },
+    // // share image result / medic
+    {
+      path: language === "es" ? "/compartir-v2/:nhc/imagen/:url" : "/share/:nhc/image/:url",
+      name: "v2-share-image-result-view",
+      component: V2ShareImageResultView,
       props: true,
       meta: {
         authRequired: false,
