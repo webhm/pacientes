@@ -210,14 +210,14 @@ const sendDate = async () => {
         });
       }
 
-      const form = {
+      const data = {
         'session': id,
         'categoria': 'metrovirtual',
         'campos': JSON.stringify(fields)
       };
 
-      console.log('form');
-      console.log(form);
+      console.log('data');
+      console.log(data);
 
       const url = 'https://apicvox.hospitalmetropolitano.org/crmcontactvox/API_HM/rest.php';
 
@@ -227,7 +227,7 @@ const sendDate = async () => {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: Object.entries(form)
+          body: Object.entries(data)
               .map(([key, value]) => `${key}=${encodeURIComponent(value.toString())}`)
               .join('&'),
         });
