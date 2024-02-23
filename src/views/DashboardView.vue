@@ -72,22 +72,22 @@ const goTo = async (name) => {
           </div>
         </div>
         <!--columna de agendar-->
-<!--        <div class=" col-6 col-md-3 d-block pb-5 ">-->
-<!--          <div class="icon-img cursor-pointer" @click="goTo('agendar-cita')">-->
-<!--            <div class="row d-block img-border">-->
-<!--              <span class="color-active"><i class="fa fa-circle" aria-hidden="true"></i></span>-->
-<!--              <img class="img-icon-color" src="@/assets/agendar-blanco.png" alt=" icon">-->
-<!--              <img class="img-icon-color color-margin" src="@/assets/agendar.png" alt=" icon" >-->
-<!--              <br>-->
-<!--            </div>-->
-<!--            <p class="d-block text-icon-color mt-3">-->
-<!--              Agendar Cita <br>-->
-<!--              <span>*Examen de Imagen</span> <br>-->
-<!--              <span>*Laboratorio a Domicilio</span>-->
-<!--            </p>-->
-<!--          </div>-->
-<!--        </div>-->
-        <!--columna de ruta-->
+        <div class=" col-6 col-md-3 d-block pb-5 ">
+          <div class="icon-img cursor-pointer" @click="goTo('agendar-cita')">
+            <div class="row d-block img-border">
+              <span class="color-active"><i class="fa fa-circle" aria-hidden="true"></i></span>
+              <img class="img-icon-color" src="@/assets/agendar-blanco.png" alt=" icon">
+              <img class="img-icon-color color-margin" src="@/assets/agendar.png" alt=" icon" >
+              <br>
+            </div>
+            <p class="d-block text-icon-color mt-3">
+              Agendar Cita <br>
+              <span>*Examen de Imagen</span> <br>
+              <span>*Laboratorio a Domicilio</span>
+            </p>
+          </div>
+        </div>
+<!--        columna de ruta-->
 <!--        <div class=" col-6 col-md-3 d-block pb-5 ">-->
 <!--          <div class="icon-img cursor-pointer" @click="goTo('ruta-del-paciente')">-->
 <!--            <div class="row d-block img-border">-->
@@ -102,18 +102,18 @@ const goTo = async (name) => {
 <!--            </p>-->
 <!--          </div>-->
 <!--        </div>-->
-<!--        <div class=" col-6 col-md-3 d-block pb-5">-->
-<!--          <div class="icon-img cursor-pointer" @click="goTo('buzon-de-sugerencias')">-->
-<!--            <div class="row d-block img-border">-->
-<!--              <img class="img-icon-color" src="@/assets/buzon-blanco.png" alt=" icon">-->
-<!--              <img class="img-icon-color color-margin" src="@/assets/buzon.png" alt=" icon" >-->
-<!--              <br>-->
-<!--            </div>-->
-<!--            <p class="d-block mt-3 text-icon-color">Buzón<br>-->
-<!--              de Sugerencias-->
-<!--            </p>-->
-<!--          </div>-->
-<!--        </div>-->
+        <div class=" col-6 col-md-3 d-block pb-5">
+          <div class="icon-img cursor-pointer" @click="goTo('buzon-de-sugerencias')">
+            <div class="row d-block img-border">
+              <img class="img-icon-color" src="@/assets/buzon-blanco.png" alt=" icon">
+              <img class="img-icon-color color-margin" src="@/assets/buzon.png" alt=" icon" >
+              <br>
+            </div>
+            <p class="d-block mt-3 text-icon-color">Buzón<br>
+              de Sugerencias
+            </p>
+          </div>
+        </div>
       </div>
 <!--      <div class="row mb-2 justify-content-center  pb-2 my-3">-->
 <!--        &lt;!&ndash;columna de planes de egreso&ndash;&gt;-->

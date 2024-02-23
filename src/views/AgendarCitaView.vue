@@ -125,7 +125,176 @@ const send = async () => {
     });
   }
 };
+const getSession = async () => {
+  const url = 'https://apicvox.hospitalmetropolitano.org/crmcontactvox/service/v4_1/rest.php';
 
+  // Datos a enviar
+  const data = {
+    'input_type': 'JSON',
+    'response_type': 'JSON',
+    'method': 'login',
+    'rest_data': JSON.stringify({
+      'user_auth': {
+        'user_name': 'apicrm',
+        'password': '3b6e22a5dc39b24cab5f55cb8cc61012',
+      },
+      'application_name': 'RestCrm',
+      'name_value_list': []
+    }),
+  };
+
+  console.log('auth form');
+  console.log(data);
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: Object.entries(data)
+          .map(([key, value]) => `${key}=${encodeURIComponent(value.toString())}`)
+          .join('&'),
+    });
+
+    const responseBody = await response.json();
+
+    console.log('Respuesta:', responseBody.id);
+    return responseBody.id;
+  } catch (error) {
+    console.log('Error:', error);
+    return null;
+  }
+};
+const sendDate = async () => {
+
+
+  try {
+    dirty.value = true;
+    isLoading.value = true;
+    if (!form.value.servicio || !form.value.forma_de_contacto || !form.value.nombre || !form.value.email ||
+        !form.value.phone || !form.value.ciudad) {
+      notify({
+        title: "Datos incompletos",
+        text: 'por favor completa los campos requeridos',
+        type: 'error'
+      });
+      isLoading.value = false;
+      return;
+    }
+
+    const id = await getSession();
+
+    if (id !== null) {
+      const fields = [
+        { 'name': 'nombres', 'value': form.value.nombre },
+        { 'name': 'celular', 'value': form.value.phone },
+        { 'name': 'correo', 'value': form.value.email },
+        { 'name': 'ciudad', 'value': form.value.ciudad },
+        { 'name': 'servicio', 'value': form.value.servicio },
+        { 'name': 'metodo_contacto', 'value': form.value.forma_de_contacto }
+      ];
+
+      if (file.value) {
+        const fileName = file.value.file.name;
+        const fileNameWithoutExtension = fileName.split('.').slice(0, -1).join('.');
+        const fileBytes = await file.value.file.readAsArrayBuffer();
+        const base64String = btoa(String.fromCharCode(...new Uint8Array(fileBytes)));
+
+        fields.push({
+          'documento': {
+            'document_name': fileNameWithoutExtension,
+            'filename': fileName,
+            'file': base64String
+          }
+        });
+      }
+
+      const form = {
+        'session': id,
+        'categoria': 'metrovirtual',
+        'campos': JSON.stringify(fields)
+      };
+
+      console.log('form');
+      console.log(form);
+
+      const url = 'https://apicvox.hospitalmetropolitano.org/crmcontactvox/API_HM/rest.php';
+
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: Object.entries(form)
+              .map(([key, value]) => `${key}=${encodeURIComponent(value.toString())}`)
+              .join('&'),
+        });
+
+        const responseBody = await response.json();
+        console.log('Respuesta ID:', responseBody.id);
+
+        if (responseBody.status) {
+          // Show success message
+          notify({
+            title: "Información enviada",
+            text: 'Un asesor se contactará lo antes posible',
+            type: 'success'
+          });
+          success.value = true;
+          dirty.value = false;
+          file.value = null;
+          form.value = {
+            servicio: null,
+            nombre: null,
+            forma_de_contacto: null,
+            email: null,
+            phone: null,
+            ciudad: null,
+            origen: 'MetroVirtual Web',
+            leadbox_token: '2b0aa535-a77a-4354-ae59-47e27838aa6c|67F9aCJfghm93c0LXiHBKOqf9IshCypfAmiZsijsiQN2WtE0IxKW6nX41dAjGbl1RR8Cq2bPoHK8vztli6mJovtDLbbsDzEV7Mo5',
+            //leadbox_token: 'c509f524-c478-4150-a437-5365cc788a43|6CupB3oRIP1sUyhIVohjiXe9xglMMZd8382AgEdI7goG7ZCijodeJZICbYYpPWiIJl1VpnQkmQ8u1UAa8hrHQn1uJpAXRRQlV0eH',
+          };
+        } else {
+          // Show error message
+          notify({
+            title: "Hubo un error",
+            text: responseBody.message,
+            type: 'error'
+          });
+        }
+      } catch (error) {
+
+        // Show error message
+        isLoading.value = false;
+        console.log('error', error);
+        notify({
+          title: "Error",
+          text: error,
+          type: 'error'
+        });
+      }
+    } else {
+      // Show error message
+      isLoading.value = false;
+      notify({
+        title: "Error",
+        text: 'no se pudo enviar',
+        type: 'error'
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    // Show error message
+    isLoading.value = false;
+    notify({
+      title: "Error",
+      text: error,
+      type: 'error'
+    });
+  }
+}
 const goBack = () => {
   router.push({name: 'dashboard'});
 };
@@ -309,7 +478,7 @@ class UploadableFile {
                 <div class="row my-1">
                   <div class="col-12">
                     <button class="text-center recover-password cursor-pointer mr-4 btn-loginv3"
-                            translate @click="send()">
+                            translate @click="sendDate()">
                       Agendar una cita
                     </button>
                   </div>
