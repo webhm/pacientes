@@ -306,12 +306,12 @@ router.beforeEach(async (to, from, next) => {
   const storeToken = computed(() => authStore.token);
   const token = localStorage.getItem('patientMetrovirtualToken');
   const user = JSON.parse(localStorage.getItem('patientMetrovirtualUser'));
-  console.log("user router", storeUser.value);
-  console.log("storeToken router", storeToken.value);
-  console.log("stored token", token);
-  console.log("stored user", user);
-  console.log("to", to);
-  console.log("to.meta.authRequired", to.meta.authRequired);
+  // console.log("user router", storeUser.value);
+  // console.log("storeToken router", storeToken.value);
+  // console.log("stored token", token);
+  // console.log("stored user", user);
+  // console.log("to", to);
+  // console.log("to.meta.authRequired", to.meta.authRequired);
 
   
   if (to.meta.authRequired) {

@@ -72,7 +72,7 @@ const send = async () => {
       formDataObj.append('origen', form.value.origen);
       formDataObj.append('leadbox_token', form.value.leadbox_token);
       formDataObj.append('file', file.value.file);
-      console.log('formData', formDataObj);
+      //console.log('formData', formDataObj);
       leadsResponse = await axios.post('https://leadbox.ec/api/callback/landing', formDataObj, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -85,8 +85,8 @@ const send = async () => {
 
     isLoading.value = false;
     const responseData = leadsResponse.data;
-    console.log('leadsResponse', leadsResponse);
-    console.log('responseData', responseData);
+    // console.log('leadsResponse', leadsResponse);
+    // console.log('responseData', responseData);
     if (responseData.success) {
       notify({
         title: "Información enviada",
@@ -143,8 +143,8 @@ const getSession = async () => {
     }),
   };
 
-  console.log('auth form');
-  console.log(data);
+  // console.log('auth form');
+  // console.log(data);
 
   try {
     const response = await fetch(url, {
@@ -159,13 +159,26 @@ const getSession = async () => {
 
     const responseBody = await response.json();
 
-    console.log('Respuesta:', responseBody.id);
+    //console.log('Respuesta:', responseBody.id);
     return responseBody.id;
   } catch (error) {
     console.log('Error:', error);
     return null;
   }
 };
+
+const convertToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      resolve(reader.result.split(',')[1]); // Devuelve solo los datos base64 (sin el encabezado "data:image/jpeg;base64," o similar)
+    };
+
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
 const sendDate = async () => {
 
 
@@ -196,15 +209,13 @@ const sendDate = async () => {
       ];
 
       if (file.value) {
-        console.log('file', file.value);
-        console.log('file.value.file.name', file.value.file.name);
-        console.log('fileBytes', file.value.file);
+        //console.log('file', file.value);
+        //console.log('file.value.file.name', file.value.file);
+
         const fileName = file.value.file.name;
         const fileNameWithoutExtension = fileName.split('.').slice(0, -1).join('.');
-        const fileBytes = await file.value.file.readAsArrayBuffer();
-        console.log('fileBytes', fileBytes);
-        const base64String = btoa(String.fromCharCode(...new Uint8Array(fileBytes)));
-
+        const base64String = await convertToBase64(file.value.file);
+        //console.log('base64String', base64String);
         fields.push({
           'documento': {
             'document_name': fileNameWithoutExtension,
@@ -246,7 +257,7 @@ const sendDate = async () => {
             text: 'Un asesor se contactará lo antes posible',
             type: 'success'
           });
-          success.value = false;
+          isLoading.value = false;
           success.value = true;
           dirty.value = false;
           file.value = null;
@@ -262,7 +273,7 @@ const sendDate = async () => {
             //leadbox_token: 'c509f524-c478-4150-a437-5365cc788a43|6CupB3oRIP1sUyhIVohjiXe9xglMMZd8382AgEdI7goG7ZCijodeJZICbYYpPWiIJl1VpnQkmQ8u1UAa8hrHQn1uJpAXRRQlV0eH',
           };
         } else {
-          success.value = false;
+          isLoading.value = false;
           // Show error message
           notify({
             title: "Hubo un error",
@@ -310,9 +321,7 @@ const onInputChange = (e) => {
   // reset so that selecting the same file again will still cause it to fire this change
 };
 const addFiles = (newFile) => {
-  console.log('newFile', newFile);
   file.value = new UploadableFile(newFile);
-  console.log('file', file.value);
 };
 
 onMounted(async () => {
