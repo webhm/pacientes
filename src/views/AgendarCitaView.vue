@@ -196,9 +196,13 @@ const sendDate = async () => {
       ];
 
       if (file.value) {
+        console.log('file', file.value);
+        console.log('file.value.file.name', file.value.file.name);
+        console.log('fileBytes', file.value.file);
         const fileName = file.value.file.name;
         const fileNameWithoutExtension = fileName.split('.').slice(0, -1).join('.');
         const fileBytes = await file.value.file.readAsArrayBuffer();
+        console.log('fileBytes', fileBytes);
         const base64String = btoa(String.fromCharCode(...new Uint8Array(fileBytes)));
 
         fields.push({
