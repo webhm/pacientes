@@ -216,8 +216,8 @@ const sendDate = async () => {
         'campos': JSON.stringify(fields)
       };
 
-      console.log('data');
-      console.log(data);
+      // console.log('data');
+      // console.log(data);
 
       const url = 'https://apicvox.hospitalmetropolitano.org/crmcontactvox/API_HM/rest.php';
 
@@ -233,7 +233,7 @@ const sendDate = async () => {
         });
 
         const responseBody = await response.json();
-        console.log('Respuesta ID:', responseBody.id);
+
 
         if (responseBody.status) {
           // Show success message
@@ -242,6 +242,7 @@ const sendDate = async () => {
             text: 'Un asesor se contactará lo antes posible',
             type: 'success'
           });
+          success.value = false;
           success.value = true;
           dirty.value = false;
           file.value = null;
@@ -257,6 +258,7 @@ const sendDate = async () => {
             //leadbox_token: 'c509f524-c478-4150-a437-5365cc788a43|6CupB3oRIP1sUyhIVohjiXe9xglMMZd8382AgEdI7goG7ZCijodeJZICbYYpPWiIJl1VpnQkmQ8u1UAa8hrHQn1uJpAXRRQlV0eH',
           };
         } else {
+          success.value = false;
           // Show error message
           notify({
             title: "Hubo un error",
