@@ -7,9 +7,11 @@ import {useNotification} from "@kyvg/vue3-notification";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+
 dayjs.extend(utc);
 dayjs.extend(timezone);
 import axios from 'axios';
+
 const {notify} = useNotification();
 const authStore = useAuthStore();
 const now = ref(dayjs());
@@ -20,8 +22,8 @@ const AM7 = dayjs().set('hour', 7).set('minute', 0).set('second', 0);
 const PM7 = dayjs().set('hour', 19).set('minute', 0).set('second', 0);
 const user = computed(() => authStore.user);
 
-const before7 = computed(() =>now.value.isBefore(AM7));
-const after7 = computed(() =>now.value.isAfter(PM7));
+const before7 = computed(() => now.value.isBefore(AM7));
+const after7 = computed(() => now.value.isAfter(PM7));
 //const myInvoicesStore = useMyInvoicesStore();
 //const invoices = computed(() => myInvoicesStore.invoices);
 
@@ -107,7 +109,7 @@ const send = async () => {
         leadbox_token: '2b0aa535-a77a-4354-ae59-47e27838aa6c|67F9aCJfghm93c0LXiHBKOqf9IshCypfAmiZsijsiQN2WtE0IxKW6nX41dAjGbl1RR8Cq2bPoHK8vztli6mJovtDLbbsDzEV7Mo5',
         //leadbox_token: 'c509f524-c478-4150-a437-5365cc788a43|6CupB3oRIP1sUyhIVohjiXe9xglMMZd8382AgEdI7goG7ZCijodeJZICbYYpPWiIJl1VpnQkmQ8u1UAa8hrHQn1uJpAXRRQlV0eH',
       };
-    }else{
+    } else {
       notify({
         title: "Hubo un error",
         text: responseData.message,
@@ -200,12 +202,12 @@ const sendDate = async () => {
 
     if (id !== null) {
       const fields = [
-        { 'name': 'nombres', 'value': form.value.nombre },
-        { 'name': 'celular', 'value': form.value.phone },
-        { 'name': 'correo', 'value': form.value.email },
-        { 'name': 'ciudad', 'value': form.value.ciudad },
-        { 'name': 'servicio', 'value': form.value.servicio },
-        { 'name': 'metodo_contacto', 'value': form.value.forma_de_contacto }
+        {'name': 'nombres', 'value': form.value.nombre},
+        {'name': 'celular', 'value': form.value.phone},
+        {'name': 'correo', 'value': form.value.email},
+        {'name': 'ciudad', 'value': form.value.ciudad},
+        {'name': 'servicio', 'value': form.value.servicio},
+        {'name': 'metodo_contacto', 'value': form.value.forma_de_contacto}
       ];
 
       if (file.value) {
@@ -227,9 +229,17 @@ const sendDate = async () => {
 
       const data = {
         'session': id,
-        'categoria': 'metrovirtual',
+
         'campos': JSON.stringify(fields)
       };
+
+      if (form.value.servicio === 'laboratorio a domicilio') {
+        data.categoria = 'metrovirtual_laboratorio';
+      } else if (form.value.servicio === 'examen de imagen') {
+        data.categoria = 'metrovirtual_imagen';
+      } else {
+        data.categoria = 'metrovirtual';
+      }
 
       // console.log('data');
       // console.log(data);
