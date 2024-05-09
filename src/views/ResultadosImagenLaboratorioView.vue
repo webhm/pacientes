@@ -538,7 +538,7 @@ onMounted(async () => {
                               :key="labResultKey">
                             <div class="col-9">
                               <p class="title-results"><b>{{ labResult?.ORIGEN }}</b>
-                                <span class="p-2 mx-2 pill" v-if="isWithin24Hours(labResult?.fecha_)">Nuevo</span>
+                                <span class="p-2 mx-2 pill orange" v-if="isWithin24Hours(labResult?.fecha_)">Nuevo</span>
                               </p>
                               <p class="text-results">{{ labResult?.FECHA }}</p>
                               <p class="text-results">
@@ -655,7 +655,7 @@ onMounted(async () => {
                                 :key="imageResultKey">
                               <div class="col-9">
                                 <p class="title-results"><b>{{ imageResult?.ESTUDIO }}</b>
-                                  <span class="p-2 mx-2 pill" v-if="isWithin24Hours(imageResult?.fecha_)">Nuevo</span>
+                                  <span class="p-2 mx-2 pill orange" v-if="isWithin24Hours(imageResult?.fecha_)">Nuevo</span>
                                 </p>
                                 <p class="text-results">{{ imageResult?.FECHA }}</p>
                                 <p class="text-results">
@@ -789,7 +789,9 @@ img.img-metrovirtual {
 .row.d-block:hover {
   background: #0B72D8 !important;
 }
-
+.orange {
+  background-color: #ff8201;
+}
 
 .img-icon-color {
   width: 105px;
