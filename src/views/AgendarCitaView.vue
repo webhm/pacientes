@@ -128,7 +128,7 @@ const send = async () => {
   }
 };
 const getSession = async () => {
-  const url = 'https://apicvox.hospitalmetropolitano.org/crmcontactvox/service/v4_1/rest.php';
+  const url = 'https://apicvox.hospitalmetropolitano.org/crmcontactvoxcx/service/v4_1/rest.php';
 
   // Datos a enviar
   const data = {
@@ -244,7 +244,7 @@ const sendDate = async () => {
       // console.log('data');
       // console.log(data);
 
-      const url = 'https://apicvox.hospitalmetropolitano.org/crmcontactvox/API_HM/rest.php';
+      const url = 'https://apicvox.hospitalmetropolitano.org/crmcontactvoxcx/API_HM/rest.php';
 
       try {
         const response = await fetch(url, {
